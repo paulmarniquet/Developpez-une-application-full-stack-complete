@@ -1,12 +1,15 @@
 package com.openclassrooms.mddapi.entity;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
 
@@ -14,12 +17,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NonNull
     @Column(name="email")
     private String email;
 
+    @NonNull
     @Column(name="name")
     private String name;
 
+    @NonNull
     @Column (name="password")
     private String password;
 
@@ -30,6 +36,7 @@ public class User {
     @Column(name="created_at")
     private Timestamp created_at;
 
+    @UpdateTimestamp
     @Column(name="updated_at")
     private Timestamp updated_at;
 }

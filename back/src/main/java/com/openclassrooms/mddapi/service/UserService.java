@@ -23,5 +23,5 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void getUserTopics() {}
+    public void getUserTopics(Long id) {}
 }

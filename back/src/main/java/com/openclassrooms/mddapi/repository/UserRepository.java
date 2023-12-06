@@ -1,0 +1,6 @@
+package com.openclassrooms.mddapi.repository;
+
+import org.springframework.data.repository.CrudRepository;
+import com.openclassrooms.mddapi.entity.User;
+
+public interface UserRepository extends CrudRepository<User, Integer> {}

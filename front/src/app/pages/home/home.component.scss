@@ -1,7 +1,52 @@
 .center {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.center img {
+    width: 40%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.buttons .mat-raised-button {
+    margin: 15px;
+
+    &:hover {
+        background-color: #7550EC;
+        color: #ffffff;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .center img {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+
+    .center {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .buttons {
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0;
+    }
 }

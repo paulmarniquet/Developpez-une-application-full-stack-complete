@@ -1,0 +1,19 @@
+<nav class="flex justify-between w-screen h-1/6 header">
+    <div class="w-1/3 h-auto justify-center flex">
+        <img routerLink="/" class="cursor-pointer" src="/assets/logo_p6.png" alt="logo"/>
+    </div>
+    <ul class="flex h-auto justify-center items-center navigation" *ngIf="showNavbar">
+        <li  routerLink="articles" class="mr-20 text-2xl cursor-pointer hover:text-bluefont articles">Articles</li>
+        <li routerLink="themes" class="mr-20 text-2xl cursor-pointer hover:text-bluefont themes">Thèmes</li>
+        <li routerLink="me" class="mr-20 cursor-pointer">
+            <a>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                     stroke="currentColor" class="w-16 h-16 hover:stroke-bluefont">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+            </a>
+        </li>
+    </ul>
+</nav>
+<hr class="w-screen h-0.5 bg-black"/>

@@ -9,7 +9,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
     showNavbar: boolean = true;
 
-    constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+    constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    }
 
     ngOnInit(): void {
         const excludedPages: string[] = ['login', 'register'];

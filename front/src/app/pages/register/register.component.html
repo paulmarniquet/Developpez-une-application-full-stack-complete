@@ -1,2 +1,34 @@
-<app-header class="hidden sm:flex"></app-header>
-<p>register works!</p>
+<app-header class="header"></app-header>
+<div class="flex justify-start ml-16 mt-10">
+    <svg routerLink="/" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+         stroke="currentColor" class="w-16 h-16 cursor-pointer">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
+    </svg>
+</div>
+<div class="registerForm">
+    <ng-form>
+        <div class="h-max flex flex-col justify-center items-center">
+            <img  class="w-60 flex sm:hidden" src="/assets/logo_p6.png" alt="logo"/>
+            <h1 class="text-3xl font-bold">Inscription</h1>
+            <div class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center items-center">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" name="username" id="username" class="border-2 border-gray-500 rounded-md"
+                           [(ngModel)]="username">
+                </div>
+                <div class="flex flex-col justify-center items-center">
+                    <label for="email">Adresse e-mail</label>
+                    <input type="email" name="email" id="email" class="border-2 border-gray-500 rounded-md"
+                           [(ngModel)]="email">
+                </div>
+                <div class="flex flex-col justify-center items-center">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="password" class="border-2 border-gray-500 rounded-md"
+                           [(ngModel)]="password">
+                </div>
+                <button class="bg-amber-900 text-white rounded-md p-2 m-2" (click)="register()">S'inscrire</button>
+            </div>
+        </div>
+    </ng-form>
+</div>
+

@@ -9,24 +9,24 @@
     <ng-form>
         <div class="h-max flex flex-col justify-center items-center">
             <img  class="w-60 flex sm:hidden" src="/assets/logo_p6.png" alt="logo"/>
-            <h1 class="text-3xl font-bold">Inscription</h1>
+            <h1 class="text-6xl">Inscription</h1>
             <div class="flex flex-col justify-center items-center">
-                <div class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center mt-8">
                     <label for="username">Nom d'utilisateur</label>
-                    <input type="text" name="username" id="username" class="border-2 border-gray-500 rounded-md"
+                    <input type="text" name="username" id="username" class="h-10 w-72 border-2 border-gray-500 rounded-md pl-2"
                            [(ngModel)]="username">
                 </div>
-                <div class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center mt-4">
                     <label for="email">Adresse e-mail</label>
-                    <input type="email" name="email" id="email" class="border-2 border-gray-500 rounded-md"
+                    <input type="email" name="email" id="email" class="h-10 w-72 border-2 border-gray-500 rounded-md pl-2"
                            [(ngModel)]="email">
                 </div>
-                <div class="flex flex-col justify-center items-center">
+                <div class="flex flex-col justify-center mt-4">
                     <label for="password">Mot de passe</label>
-                    <input type="password" name="password" id="password" class="border-2 border-gray-500 rounded-md"
+                    <input type="password" name="password" id="password" class="h-10 w-72 border-2 border-gray-500 rounded-md pl-2"
                            [(ngModel)]="password">
                 </div>
-                <button class="bg-amber-900 text-white rounded-md p-2 m-2" (click)="register()">S'inscrire</button>
+                <button class="bg-bluefont text-white rounded-md px-8 py-2 mt-8" (click)="register()">S'inscrire</button>
             </div>
         </div>
     </ng-form>

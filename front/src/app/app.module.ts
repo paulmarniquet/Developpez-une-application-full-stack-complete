@@ -10,9 +10,12 @@ import { RegisterComponent } from './pages/register/register.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ArticlesComponent } from './pages/articles/articles.component';
 import {FormsModule} from "@angular/forms";
+import { ThemesComponent } from './pages/themes/themes.component';
+import { ArticleComponent } from './components/article/article.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, ThemesComponent, ArticleComponent, ProfileComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,

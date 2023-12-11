@@ -8,6 +8,9 @@ module.exports = {
         colors: {
             'bluefont': '#6C5CCF',
         },
+        screens: {
+            'mobile': {'max': '639px'},
+        }
     },
   },
   plugins: [],

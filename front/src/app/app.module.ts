@@ -7,9 +7,11 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ArticlesComponent } from './pages/articles/articles.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

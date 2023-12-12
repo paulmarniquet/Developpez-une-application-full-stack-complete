@@ -13,9 +13,10 @@ import {FormsModule} from "@angular/forms";
 import { ThemesComponent } from './pages/themes/themes.component';
 import { ArticleComponent } from './components/article/article.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ThemeComponent } from './components/theme/theme.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, ThemesComponent, ArticleComponent, ProfileComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, ThemesComponent, ArticleComponent, ProfileComponent, ThemeComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,

@@ -1,0 +1,37 @@
+<app-header></app-header>
+<div class="flex justify-start ml-16 mt-10">
+    <svg routerLink="/articles" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+         stroke="currentColor" class="w-16 h-16 cursor-pointer">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/>
+    </svg>
+</div>
+<div class="newArticleForm">
+    <ng-form>
+        <div class="h-max flex flex-col justify-center items-center">
+            <h1 class="text-6xl">Créer un nouvel article</h1>
+            <div class="flex flex-col justify-center items-center">
+
+                <div class="flex flex-col justify-center mt-8">
+                    <input placeholder="Sélectionner un thème" type="text" name="theme" id="theme"
+                           class="text-lg h-10 w-72 border-2 border-bluefont rounded-md pl-2"
+                           [(ngModel)]="themeArticle">
+                </div>
+
+                <div class="flex flex-col justify-center mt-8">
+                    <input placeholder="Titre de l'article" type="text" name="titre" id="titre"
+                           class="text-lg h-10 w-72 border-2 border-bluefont rounded-md pl-2"
+                           [(ngModel)]="titreArticle">
+                </div>
+
+                <div class="flex flex-col justify-center mt-8">
+                    <textarea placeholder="Contenu de l'article" type="text" name="contenu" id="contenu"
+                              class="h-40 w-72 border-2 border-bluefont rounded-md pl-2"
+                              [(ngModel)]="contenuArticle"></textarea>
+                </div>
+
+                <button class="bg-bluefont text-white rounded-md px-8 py-2 mt-8" (click)="submitNewArticle()">Créer
+                </button>
+            </div>
+        </div>
+    </ng-form>
+</div>

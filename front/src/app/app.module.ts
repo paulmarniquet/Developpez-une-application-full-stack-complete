@@ -14,9 +14,11 @@ import { ThemesComponent } from './pages/themes/themes.component';
 import { ArticleComponent } from './components/article/article.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ThemeComponent } from './components/theme/theme.component';
+import { CreateArticleComponent } from './components/create-article/create-article.component';
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, ThemesComponent, ArticleComponent, ProfileComponent, ThemeComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, ThemesComponent, ArticleComponent, ProfileComponent, ThemeComponent, CreateArticleComponent, PostComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,

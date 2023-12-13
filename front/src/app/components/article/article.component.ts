@@ -1,4 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
+import {Article} from "../../pages/interfaces/article.interface";
+import {Topic} from "../../pages/interfaces/topic.interface";
+import {TopicService} from "../../pages/services/topic.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
     selector: 'app-article',
@@ -6,14 +10,19 @@ import {Component, OnInit, Input} from '@angular/core';
     styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
-    @Input() titre: string | undefined;
-    @Input() date: string | undefined;
-    @Input() auteur: string | undefined;
-    @Input() contenu: string | undefined;
+    @Input() article: Article | undefined;
 
-    constructor() {}
+    private topic: Topic | undefined;
+    private TopicsService: TopicService = new TopicService(this.httpClient);
 
-    ngOnInit(): void {
+    constructor(private httpClient: HttpClient) {
     }
 
+    ngOnInit(): void {
+        console.log(this.article?.topic_id);
+        this.TopicsService.getTopicById(this.article?.topic_id).subscribe((TopicFound: Topic) => {
+            this.topic = TopicFound;
+            console.log(this.topic);
+        });
+    }
 }

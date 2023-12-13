@@ -10,16 +10,16 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ArticlesComponent } from './pages/articles/articles.component';
 import {FormsModule} from "@angular/forms";
-import { ThemesComponent } from './pages/themes/themes.component';
+import { TopicsComponent } from './pages/topics/topics.component';
 import { ArticleComponent } from './components/article/article.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { ThemeComponent } from './components/theme/theme.component';
+import { TopicComponent } from './components/topic/topic.component';
 import { CreateArticleComponent } from './components/create-article/create-article.component';
 import { PostComponent } from './components/post/post.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, ThemesComponent, ArticleComponent, ProfileComponent, ThemeComponent, CreateArticleComponent, PostComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, TopicsComponent, ArticleComponent, ProfileComponent, TopicComponent, CreateArticleComponent, PostComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,

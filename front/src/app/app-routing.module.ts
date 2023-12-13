@@ -4,7 +4,7 @@ import {HomeComponent} from './pages/home/home.component';
 import {LoginComponent} from "./pages/auth/login/login.component";
 import {RegisterComponent} from "./pages/auth/register/register.component";
 import {ArticlesComponent} from "./pages/articles/articles.component";
-import {ThemesComponent} from "./pages/themes/themes.component";
+import {TopicsComponent} from "./pages/topics/topics.component";
 import {ProfileComponent} from "./pages/profile/profile.component";
 import {CreateArticleComponent} from "./components/create-article/create-article.component";
 
@@ -14,7 +14,7 @@ const routes: Routes = [{path: '', component: HomeComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'articles', component: ArticlesComponent},
-    {path: 'themes', component: ThemesComponent},
+    {path: 'topics', component: TopicsComponent},
     {path: 'me', component: ProfileComponent},
     {path: 'articles/create', component: CreateArticleComponent}
 ];

@@ -11,9 +11,13 @@
         </div>
     </div>
     <div class="grid sm:grid-cols-2 mt-10 gap-8">
-        <app-article></app-article>
-        <app-article></app-article>
-        <app-article></app-article>
-        <app-article></app-article>
+        <ng-container *ngFor="let article of articles">
+            <app-article
+                [titre]="article.titre"
+                [date]="article.date"
+                [auteur]="article.auteur"
+                [contenu]="article.contenu"
+            ></app-article>
+        </ng-container>
     </div>
 </section>

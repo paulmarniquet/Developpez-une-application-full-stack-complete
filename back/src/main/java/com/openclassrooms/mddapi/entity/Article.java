@@ -1,9 +1,12 @@
 package com.openclassrooms.mddapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -19,30 +22,25 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @NonNull
-    @Column(name="title")
-    private String title;
-
-    @NonNull
-    @Column(name="content")
-    private String content;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JoinColumn(name = "article_id")
-    private List<Post> posts;
-
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
     private Topic topic;
 
-    @Column(name="created_at")
-    private Timestamp created_at;
+    @NotNull
+    private String title;
+
+    @NotNull
+    private String content;
+
+    @CreatedDate
+    @Column(name = "created_at", updatable = false)
+    private Timestamp createdAt;
 
     @UpdateTimestamp
-    @Column(name="updated_at")
-    private Timestamp updated_at;
+    @Column(name = "updated_at")
+    private Timestamp updatedAt;
 }

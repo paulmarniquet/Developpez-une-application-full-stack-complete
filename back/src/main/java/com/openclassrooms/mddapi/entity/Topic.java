@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -28,9 +27,6 @@ public class Topic {
     @Column(name="content")
     private String content;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "topic")
-    private List<Article> articles = new ArrayList<>();
-
     @Column(name="created_at")
     private Timestamp created_at;
 
@@ -38,3 +34,4 @@ public class Topic {
     @Column(name="updated_at")
     private Timestamp updated_at;
 }
+

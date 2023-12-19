@@ -23,4 +23,8 @@ public class ArticleService {
         return articleRepository.findAll();
     }
 
+    public Optional<Article> saveArticle(Article article) {
+        return Optional.of(articleRepository.save(article));
+    }
+
 }

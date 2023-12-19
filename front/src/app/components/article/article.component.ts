@@ -19,10 +19,10 @@ export class ArticleComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.article?.topic_id);
+/*        console.log(this.article?.topic_id);
         this.TopicsService.getTopicById(this.article?.topic_id).subscribe((TopicFound: Topic) => {
             this.topic = TopicFound;
             console.log(this.topic);
-        });
+        });*/
     }
 }

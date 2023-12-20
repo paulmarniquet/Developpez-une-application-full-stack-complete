@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.ProfileDto;
+import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.Data;
@@ -33,4 +34,17 @@ public class UserService {
         return Optional.of(userRepository.save(user));
     }
 
+    public Optional<User> subscribe(Topic topic) {
+        Long id = 1L;
+        User user = userRepository.findById(id).get();
+        user.getTopics().add(topic);
+        return Optional.of(userRepository.save(user));
+    }
+
+    public Optional<User> unsubscribe(Topic topic) {
+        Long id = 1L;
+        User user = userRepository.findById(id).get();
+        user.getTopics().remove(topic);
+        return Optional.of(userRepository.save(user));
+    }
 }

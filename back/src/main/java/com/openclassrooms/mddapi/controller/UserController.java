@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.dto.ProfileDto;
+import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +31,15 @@ public class UserController {
     @GetMapping("/users")
     public Iterable<User> getUsers() {
         return userService.getUsers();
+    }
+
+    @PutMapping("/1/subscribe")
+    public Optional<User> subscribe(/*@PathVariable Long id, */@RequestBody Topic topic) {
+        return userService.subscribe(topic);
+    }
+
+    @PutMapping("/1/unsubscribe")
+    public Optional<User> unsubscribe(/*@PathVariable Long id, */@RequestBody Topic topic) {
+        return userService.unsubscribe(topic);
     }
 }

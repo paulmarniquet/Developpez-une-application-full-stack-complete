@@ -1,4 +1,4 @@
-<div class="articleComponent p-4 flex-col bg-gray-200 rounded-xl">
+<div (click)="addPost()" class="articleComponent cursor-pointer p-4 flex-col bg-gray-200 rounded-xl">
     <p class="font-bold text-xl">{{ article?.title }}</p>
     <div class="flex">
         <p class="text-lg w-1/2">{{ formatDate(article?.createdAt!) }}</p>

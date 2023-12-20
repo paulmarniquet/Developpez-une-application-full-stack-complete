@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { environment } from '../../environments/environment';
 import {Article} from "../interfaces/article.interface";
@@ -10,7 +10,7 @@ import {ArticleDto} from "../dto/article-dto.interface";
 })
 export class ArticlesService {
 
-    private pathService = 'articles'
+    private pathService : string = 'articles'
 
     constructor(private httpClient: HttpClient) {}
 
@@ -20,5 +20,9 @@ export class ArticlesService {
 
     public submitNewArticle(article: ArticleDto) {
         return this.httpClient.post<ArticleDto>(`${environment.api}${this.pathService}`, article);
+    }
+
+    public getFeed(user_id: number) {
+        return this.httpClient.get<Article[]>(`${environment.api}feed/${user_id}`);
     }
 }

@@ -16,7 +16,7 @@
                            [(ngModel)]="email">
                 </div>
                 <button class="bg-bluefont text-white rounded-md px-8 py-2 mt-8" (click)="save()">Sauvegarder</button>
-                <a class="text-[#a40f0f] mt-2 font-semibold cursor-pointer">Se déconnecter</a>
+                <a (click)="logOut()" class="text-[#a40f0f] mt-2 font-semibold cursor-pointer">Se déconnecter</a>
             </div>
         </div>
     </ng-form>

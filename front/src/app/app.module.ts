@@ -18,9 +18,10 @@ import { CreateArticleComponent } from './components/create-article/create-artic
 import { PostComponent } from './components/post/post.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatSelectModule} from "@angular/material/select";
+import { CreatePostComponent } from './components/create-post/create-post.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, TopicsComponent, ArticleComponent, ProfileComponent, TopicComponent, CreateArticleComponent, PostComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, TopicsComponent, ArticleComponent, ProfileComponent, TopicComponent, CreateArticleComponent, PostComponent, CreatePostComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,

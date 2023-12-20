@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {ArticlesService} from "../../services/articles.service";
 import {TopicService} from "../../services/topic.service";
 import {Topic} from "../../interfaces/topic.interface";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-create-article',
@@ -17,7 +18,7 @@ export class CreateArticleComponent implements OnInit {
     private articleService: ArticlesService = new ArticlesService(this.httpClient);
     private topicService: TopicService = new TopicService(this.httpClient);
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient, private router : Router) {
     }
 
     ngOnInit(): void {
@@ -32,6 +33,7 @@ export class CreateArticleComponent implements OnInit {
             content: this.contenuArticle!,
             topicId: this.themeArticle!,
         }).subscribe(() => {
+            this.router.navigate(['/articles']);
         });
     }
 }

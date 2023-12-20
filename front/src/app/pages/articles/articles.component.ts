@@ -11,7 +11,7 @@ import {Article} from "../../interfaces/article.interface";
 export class ArticlesComponent implements OnInit {
     constructor(private articleService: ArticlesService) {}
 
-    public articles$: Observable<Article[]> = this.articleService.getArticles();
+    public articles$: Observable<Article[]> = this.articleService.getFeed(1);
     public articles: Article[] = [];
     public boolOrderDate: boolean = false;
 

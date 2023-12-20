@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ProfileService} from "../../services/profile.service";
 import {User} from "../../interfaces/user.interface";
-import {Article} from "../../interfaces/article.interface";
 import {Topic} from "../../interfaces/topic.interface";
-import {ProfileDto} from "../../dto/profile-dto.interface";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-profile',
@@ -16,7 +15,7 @@ export class ProfileComponent implements OnInit {
     public user: User | undefined;
     public topics: Topic[] = [];
 
-    constructor(private profileService: ProfileService) {
+    constructor(private profileService: ProfileService, private router: Router) {
     }
 
     ngOnInit(): void {
@@ -33,5 +32,10 @@ export class ProfileComponent implements OnInit {
             email: this.email,
         }).subscribe(() => {
         });
+    }
+
+    logOut() {
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
     }
 }

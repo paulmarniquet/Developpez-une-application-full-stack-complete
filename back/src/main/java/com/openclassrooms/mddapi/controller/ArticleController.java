@@ -26,6 +26,11 @@ public class ArticleController {
         return articleService.getArticle(id);
     }
 
+    @GetMapping("/feed/{user_id}")
+    public Iterable<Article> getFeed(@PathVariable Long user_id) {
+        return articleService.getFeed(user_id);
+    }
+
     @GetMapping("/articles")
     public Iterable<Article> getArticles() {
         return articleService.getArticles();

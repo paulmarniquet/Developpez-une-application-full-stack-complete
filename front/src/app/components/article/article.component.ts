@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Article} from "../../pages/interfaces/article.interface";
-import {Topic} from "../../pages/interfaces/topic.interface";
-import {TopicService} from "../../pages/services/topic.service";
+import {Article} from "../../interfaces/article.interface";
+import {Topic} from "../../interfaces/topic.interface";
+import {TopicService} from "../../services/topic.service";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -10,19 +10,21 @@ import {HttpClient} from "@angular/common/http";
     styleUrls: ['./article.component.scss']
 })
 export class ArticleComponent implements OnInit {
-    @Input() article: Article | undefined;
+    @Input() article?: Article;
 
-    private topic: Topic | undefined;
+    private topic?: Topic;
     private TopicsService: TopicService = new TopicService(this.httpClient);
 
     constructor(private httpClient: HttpClient) {
     }
 
-    ngOnInit(): void {
-/*        console.log(this.article?.topic_id);
-        this.TopicsService.getTopicById(this.article?.topic_id).subscribe((TopicFound: Topic) => {
-            this.topic = TopicFound;
-            console.log(this.topic);
-        });*/
+    ngOnInit(): void {}
+
+    formatDate(date: string): string {
+        return new Date(date).toLocaleString('fr-FR', {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric'
+        });
     }
 }

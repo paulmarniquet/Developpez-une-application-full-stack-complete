@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ArticlesService} from '../services/articles.service';
+import {ArticlesService} from '../../services/articles.service';
 import {Observable} from 'rxjs';
-import {Article} from "../interfaces/article.interface";
+import {Article} from "../../interfaces/article.interface";
 
 @Component({
     selector: 'app-articles',
@@ -13,6 +13,7 @@ export class ArticlesComponent implements OnInit {
 
     public articles$: Observable<Article[]> = this.articleService.getArticles();
     public articles: Article[] = [];
+    public boolOrderDate: boolean = false;
 
     ngOnInit(): void {
         this.getArticles();
@@ -27,5 +28,9 @@ export class ArticlesComponent implements OnInit {
                 console.error(err);
             }
         });
+    }
+
+    filterByDate() {
+        this.boolOrderDate = !this.boolOrderDate!;
     }
 }

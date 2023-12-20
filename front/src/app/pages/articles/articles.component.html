@@ -3,7 +3,7 @@
     <div class="h-24 flex justify-between items-center mobile:flex-col">
         <button routerLink="/articles/create" class="bg-bluefont text-white px-8 py-2 m-3 text-lg rounded-lg mobile:mb-4 hover:bg-white hover:text-bluefont">Créer un article</button>
         <div class="flex items-center cursor-pointer">
-            <a class="text-xl font-bold">Trier par</a>
+            <a (click)="filterByDate()" class="text-xl font-bold">Trier par</a>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="w-6 h-6 mx-2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"/>
@@ -11,8 +11,16 @@
         </div>
     </div>
     <div class="grid sm:grid-cols-2 mt-10 gap-8">
-        <ng-container *ngFor="let article of articles">
-            <app-article [article]="article"></app-article>
+        <ng-container *ngIf="boolOrderDate; else elseBlock">
+            <ng-container *ngFor="let article of articles">
+                <app-article [article]="article"></app-article>
+            </ng-container>
         </ng-container>
+        <ng-template #elseBlock>
+            <ng-container *ngFor="let article of articles.slice().reverse()">
+                <app-article [article]="article"></app-article>
+            </ng-container>
+        </ng-template>
+
     </div>
 </section>

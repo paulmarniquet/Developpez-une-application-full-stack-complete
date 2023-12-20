@@ -4,7 +4,6 @@ import com.openclassrooms.mddapi.dto.ArticleDto;
 import com.openclassrooms.mddapi.entity.Article;
 import com.openclassrooms.mddapi.service.ArticleService;
 import com.openclassrooms.mddapi.service.TopicService;
-import com.openclassrooms.mddapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +38,7 @@ public class ArticleController {
         newArticle.setTitle(article.getTitle());
         newArticle.setContent(article.getContent());
         newArticle.setTopic(topicService.getTopic(article.getTopicId()).get());
+
         System.out.println(newArticle);
         return articleService.saveArticle(newArticle);
     }

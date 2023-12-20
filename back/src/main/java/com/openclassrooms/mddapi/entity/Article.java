@@ -32,7 +32,7 @@ public class Article {
     @NotNull
     private String content;
 
-    @CreatedDate
+    @UpdateTimestamp
     @Column(name = "created_at", updatable = false)
     private Timestamp createdAt;
 

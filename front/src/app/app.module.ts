@@ -17,6 +17,7 @@ import { TopicComponent } from './components/topic/topic.component';
 import { CreateArticleComponent } from './components/create-article/create-article.component';
 import { PostComponent } from './components/post/post.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, TopicsComponent, ArticleComponent, ProfileComponent, TopicComponent, CreateArticleComponent, PostComponent],
@@ -26,7 +27,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
         BrowserAnimationsModule,
         MatButtonModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatSelectModule
     ],
   providers: [
 /*

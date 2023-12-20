@@ -11,11 +11,14 @@
             <h1 class="text-6xl">Créer un nouvel article</h1>
             <div class="flex flex-col justify-center items-center">
 
-                <div class="flex flex-col justify-center mt-8">
-                    <input placeholder="Sélectionner un thème" type="text" name="theme" id="theme"
-                           class="text-lg h-10 w-72 border-2 border-bluefont rounded-md pl-2"
-                           [(ngModel)]="themeArticle">
+                <div class="flex flex-col justify-center mt-8 h-10 w-72">
+                    <mat-select name="theme" id="theme"
+                                class="text-lg border-2 border-bluefont rounded-md pl-2"
+                                [(ngModel)]="themeArticle">
+                        <mat-option *ngFor="let topic of topics" [value]="topic.id">{{ topic.title }}</mat-option>
+                    </mat-select>
                 </div>
+
 
                 <div class="flex flex-col justify-center mt-8">
                     <input placeholder="Titre de l'article" type="text" name="titre" id="titre"

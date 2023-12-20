@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Article} from "../../pages/interfaces/article.interface";
-import {ArticlesService} from "../../pages/services/articles.service";
+import {HttpClient} from "@angular/common/http";
+import {ArticlesService} from "../../services/articles.service";
+import {TopicService} from "../../services/topic.service";
+import {Topic} from "../../interfaces/topic.interface";
 
 @Component({
     selector: 'app-create-article',
@@ -9,33 +10,28 @@ import {ArticlesService} from "../../pages/services/articles.service";
     styleUrls: ['./create-article.component.scss']
 })
 export class CreateArticleComponent implements OnInit {
-    themeArticle: any;
-    titreArticle: any;
-    contenuArticle: any;
-
+    themeArticle?: number;
+    titreArticle?: string;
+    contenuArticle?: string;
+    public topics?: Topic[];
     private articleService: ArticlesService = new ArticlesService(this.httpClient);
+    private topicService: TopicService = new TopicService(this.httpClient);
 
     constructor(private httpClient: HttpClient) {
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.topicService.getTopics().subscribe((topicsFound: Topic[]) => {
+            this.topics = topicsFound;
+        });
+    }
 
     submitNewArticle() {
-        console.log(this.titreArticle);
-        console.log(this.contenuArticle);
-        console.log(this.themeArticle);
-
-        this.themeArticle = parseInt(this.themeArticle);
-
-        const article = {
-            title: this.titreArticle,
-            content: this.contenuArticle,
-            theme_id: this.themeArticle
-        } as unknown as Article;
-
-        this.articleService.submitNewArticle(article).subscribe((articleCreated) => {
-            console.log(articleCreated);
-            console.log('Article créé');
+        this.articleService.submitNewArticle({
+            title: this.titreArticle!,
+            content: this.contenuArticle!,
+            topicId: this.themeArticle!,
+        }).subscribe(() => {
         });
     }
 }

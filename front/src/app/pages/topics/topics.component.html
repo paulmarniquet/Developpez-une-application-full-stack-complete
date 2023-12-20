@@ -1,9 +1,8 @@
 <app-header></app-header>
 <section class="px-20 py-10">
     <div class="grid sm:grid-cols-2 mt-10 gap-8">
-        <app-topic></app-topic>
-        <app-topic></app-topic>
-        <app-topic></app-topic>
-        <app-topic></app-topic>
+        <ng-container class="w-max" *ngFor="let topic of topics">
+            <app-topic [topic]="topic"></app-topic>
+        </ng-container>
     </div>
 </section>

@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.service;
 
+import com.openclassrooms.mddapi.dto.ProfileDto;
 import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.Data;
@@ -21,6 +22,15 @@ public class UserService {
 
     public Iterable<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    public Optional<User> updateUser(ProfileDto profile) {
+        /*Long id = profile.getId();*/
+        Long id = 1L;
+        User user = userRepository.findById(id).get();
+        user.setName(profile.getName());
+        user.setEmail(profile.getEmail());
+        return Optional.of(userRepository.save(user));
     }
 
 }

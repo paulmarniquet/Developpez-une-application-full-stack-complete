@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Topic} from "../../interfaces/topic.interface";
+import {Article} from "../../interfaces/article.interface";
 
 @Component({
   selector: 'app-topic',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopicComponent implements OnInit {
 
-  constructor() { }
+    @Input() topic?: Topic;
+
+    constructor() { }
 
   ngOnInit(): void {
   }

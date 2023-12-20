@@ -33,13 +33,10 @@ public class ArticleController {
 
     @PostMapping("/articles")
     public Optional<Article> saveArticle(@RequestBody ArticleDto article) {
-        System.out.println(article);
         Article newArticle = new Article();
         newArticle.setTitle(article.getTitle());
         newArticle.setContent(article.getContent());
         newArticle.setTopic(topicService.getTopic(article.getTopicId()).get());
-
-        System.out.println(newArticle);
         return articleService.saveArticle(newArticle);
     }
 }

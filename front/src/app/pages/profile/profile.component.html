@@ -28,7 +28,10 @@
 
 <div class="flex flex-col justify-center items-center mt-8">
     <p class="text-2xl font-semibold">Abonnements</p>
-    <div class="px-20">
 
-    </div>
+        <div class="grid sm:grid-cols-2 mt-10 gap-8 w-screen px-16">
+            <ng-container class="w-max" *ngFor="let topic of topics">
+                <app-topic [topic]="topic"></app-topic>
+            </ng-container>
+        </div>
 </div>

@@ -15,8 +15,12 @@ public class PostService {
     @Autowired
     private final PostRepository postRepository;
 
-    public Optional<Post> getPost(Long id) {
-        return postRepository.findById(id);
+    public Optional<Post[]> getPostsOfArticle(Long article_id) {
+        return postRepository.findByArticleId(article_id);
+    }
+
+    public Optional<Post> savePost(Post post) {
+        return Optional.of(postRepository.save(post));
     }
 
     public Iterable<Post> getPosts() {

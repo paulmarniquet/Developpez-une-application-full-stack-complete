@@ -18,6 +18,10 @@ export class ArticlesService {
         return this.httpClient.get<Article[]>(`${environment.api}${this.pathService}`);
     }
 
+    public getArticle(id: number): Observable<Article> {
+        return this.httpClient.get<Article>(`${environment.api}article/${id}`);
+    }
+
     public submitNewArticle(article: ArticleDto) {
         return this.httpClient.post<ArticleDto>(`${environment.api}${this.pathService}`, article);
     }

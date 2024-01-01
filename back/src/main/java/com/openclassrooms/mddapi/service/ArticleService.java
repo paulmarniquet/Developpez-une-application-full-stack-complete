@@ -26,18 +26,36 @@ public class ArticleService {
     @Autowired
     private final ArticleRepository articleRepository;
 
+    /**
+     * Récupère un article à partir de son id
+     * @param id
+     * @return
+     */
     public Optional<Article> getArticle(Long id) {
         return articleRepository.findById(id);
     }
 
+    /**
+     * Récupère tous les articles
+     * @return
+     */
     public Iterable<Article> getArticles() {
         return articleRepository.findAll();
     }
 
+    /**
+     * Sauvegarde un article
+     * @param article
+     * @return
+     */
     public Optional<Article> saveArticle(Article article) {
         return Optional.of(articleRepository.save(article));
     }
 
+    /**
+     * Récupère les articles liés aux topics suivis par l'utilisateur
+     * @param userId
+     */
     public Iterable<Article> getFeed(Long userId) {
         User user = userService.getUser(userId).get();
         List<Number> topicIds = new ArrayList<>();

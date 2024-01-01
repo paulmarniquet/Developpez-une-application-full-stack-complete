@@ -21,6 +21,11 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
+    /**
+     * Route qui va enregistrer un nouvel utilisateur
+     * @param user
+     * @return
+     */
     @PostMapping("/auth/register")
     public ResponseEntity<Object> saveUser(@RequestBody RegisterDto user) {
         try {
@@ -31,6 +36,11 @@ public class UserController {
         }
     }
 
+    /**
+     * Route qui va connecter un utilisateur
+     * @param user
+     * @return
+     */
     @PostMapping("/auth/login")
     public ResponseEntity<Object> login(@RequestBody LoginDto user) {
         try {
@@ -41,6 +51,11 @@ public class UserController {
         }
     }
 
+    /**
+     * Route qui va récupérer les informations de l'utilisateur connecté
+     * @param request
+     * @return
+     */
     @GetMapping("/auth/me")
     public ResponseEntity<Long> me(HttpServletRequest request) {
         try {
@@ -51,27 +66,51 @@ public class UserController {
         }
     }
 
-
+    /**
+     * Route qui va mettre à jour les informations de l'utilisateur
+     * @param id
+     * @param profile
+     * @return
+     */
     @PutMapping("/user/{id}")
     public Optional<User> updateUser(@PathVariable Long id, @RequestBody ProfileDto profile) {
         return userService.updateUser(profile, id);
     }
 
+    /**
+     * Route qui va récupérer un utilisateur à partir de son id
+     * @param id
+     * @return
+     */
     @GetMapping("/user/{id}")
     public Optional<User> getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
 
+    /**
+     * Route qui va récupérer tous les utilisateurs
+     * @return Iterable<User>
+     */
     @GetMapping("/users")
     public Iterable<User> getUsers() {
         return userService.getUsers();
     }
 
+    /**
+     * Route qui va ajouter un abonnement à un utilisateur
+     * @param id
+     * @return Iterable<Topic>
+     */
     @PutMapping("/{id}/subscribe")
     public Optional<User> subscribe(@PathVariable Long id, @RequestBody Topic topic) {
         return userService.subscribe(id, topic);
     }
 
+    /**
+     * Route qui va supprimer un abonnement à un utilisateur
+     * @param id
+     * @return Iterable<Topic>
+     */
     @PutMapping("/{id}/unsubscribe")
     public Optional<User> unsubscribe(@PathVariable Long id, @RequestBody Topic topic) {
         return userService.unsubscribe(id, topic);

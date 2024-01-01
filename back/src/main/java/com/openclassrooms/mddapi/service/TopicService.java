@@ -15,10 +15,19 @@ public class TopicService {
     @Autowired
     private final TopicRepository topicRepository;
 
+    /**
+     * Récupère un topic à partir de son id
+     * @param id
+     * @return
+     */
     public Optional<Topic> getTopic(Long id) {
         return topicRepository.findById(id);
     }
 
+    /**
+     * Récupère tous les topics
+     * @return
+     */
     public Iterable<Topic> getTopics() {
         return topicRepository.findAll();
     }

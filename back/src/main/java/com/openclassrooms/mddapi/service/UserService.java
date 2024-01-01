@@ -26,14 +26,30 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
 
+    /**
+     * Récupère un utilisateur à partir de son id
+     * @param id
+     * @return
+     */
     public Optional<User> getUser(Long id) {
         return userRepository.findById(id);
     }
 
+
+    /**
+     * Récupère tous les utilisateurs
+     * @return
+     */
     public Iterable<User> getUsers() {
         return userRepository.findAll();
     }
 
+    /**
+     * Met à jour les informations d'un utilisateur
+     * @param profile
+     * @param id
+     * @return
+     */
     public Optional<User> updateUser(ProfileDto profile, Long id) {
         User user = userRepository.findById(id).get();
         user.setName(profile.getName());
@@ -41,18 +57,36 @@ public class UserService {
         return Optional.of(userRepository.save(user));
     }
 
+
+    /**
+     * Abonne un utilisateur à un topic
+     * @param id
+     * @param topic
+     */
     public Optional<User> subscribe(Long id, Topic topic) {
         User user = userRepository.findById(id).get();
         user.getTopics().add(topic);
         return Optional.of(userRepository.save(user));
     }
 
+
+    /**
+     * Désabonne un utilisateur à un topic
+     * @param id
+     * @param topic
+     */
     public Optional<User> unsubscribe(Long id, Topic topic) {
         User user = userRepository.findById(id).get();
         user.getTopics().remove(topic);
         return Optional.of(userRepository.save(user));
     }
 
+
+    /**
+     * Enregistre un utilisateur
+     * @param request
+     * @return
+     */
     public JwtTokenDto register(RegisterDto request) {
         if (userRepository.findByEmail(request.email).isPresent() || userRepository.findByName(request.name).isPresent()) {
             throw new RuntimeException("User already exists");
@@ -69,6 +103,12 @@ public class UserService {
         }
     }
 
+
+    /**
+     * Connecte un utilisateur
+     * @param request
+     * @return
+     */
     public JwtTokenDto login(LoginDto request) {
         User userByEmail = userRepository.findByEmail(request.getEmailOrUsername())
                 .orElse(null);
@@ -88,6 +128,12 @@ public class UserService {
         }
     }
 
+
+    /**
+     * Extrait le token de la requête
+     * @param request
+     * @return token
+     */
     public String extractTokenFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
@@ -96,6 +142,11 @@ public class UserService {
         return null;
     }
 
+    /**
+     * Récupère l'id de l'utilisateur connecté
+     * @param request
+     * @return
+     */
     public Long me(HttpServletRequest request) {
         String token = extractTokenFromRequest(request);
         String email = new JwtTokenProvider().getUsernameFromToken(token);

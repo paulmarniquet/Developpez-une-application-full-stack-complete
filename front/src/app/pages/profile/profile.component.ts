@@ -3,6 +3,8 @@ import {ProfileService} from "../../services/profile.service";
 import {User} from "../../interfaces/user.interface";
 import {Topic} from "../../interfaces/topic.interface";
 import {Router} from "@angular/router";
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 @Component({
     selector: 'app-profile',
@@ -15,7 +17,7 @@ export class ProfileComponent implements OnInit {
     public user: User | undefined;
     public topics: Topic[] = [];
 
-    constructor(private profileService: ProfileService, private router: Router) {
+    constructor(private profileService: ProfileService, private router: Router, private matSnackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
@@ -32,6 +34,10 @@ export class ProfileComponent implements OnInit {
             email: this.email,
         }, Number(localStorage.getItem('userID')!)).subscribe(() => {
             this.router.navigate(['/articles']);
+            this.matSnackBar.open('Profile updated', 'Close', {
+                duration: 2000,
+            });
+
         });
     }
 
@@ -39,5 +45,8 @@ export class ProfileComponent implements OnInit {
         localStorage.removeItem('token');
         localStorage.removeItem('userID');
         this.router.navigate(['/login']);
+        this.matSnackBar.open('You are logged out', 'Close', {
+            duration: 2000,
+        });
     }
 }

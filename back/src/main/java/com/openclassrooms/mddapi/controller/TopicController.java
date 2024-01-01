@@ -19,11 +19,20 @@ public class TopicController {
     @Autowired
     private final TopicService topicService;
 
+    /**
+     * Route qui va récupérer un topic à partir de son id
+     * @param id
+     * @return
+     */
     @GetMapping("/topic/{id}")
     public Optional<Topic> getTopic(@PathVariable Long id) {
         return topicService.getTopic(id);
     }
 
+    /**
+     * Route qui va récupérer tous les topics
+     * @return Iterable<Topic>
+     */
     @GetMapping("/topics")
     public Iterable<Topic> getTopics() {
         return topicService.getTopics();

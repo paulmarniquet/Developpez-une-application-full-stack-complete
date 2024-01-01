@@ -17,6 +17,11 @@ import java.util.Date;
 public class JwtTokenProvider {
     private final String secretKey = "laclésecretesisi";
 
+    /**
+     * Méthode qui va générer un token JWT
+     * @param user
+     * @return String
+     */
     public String generateToken(LoginDto user) {
         Date now = new Date();
         Date validity = new Date(now.getTime() + 3600000);
@@ -29,6 +34,11 @@ public class JwtTokenProvider {
                 .sign(algorithm);
     }
 
+    /**
+     * Méthode qui va récupérer le username à partir du token
+     * @param token
+     * @return String
+     */
     public String getUsernameFromToken(String token) {
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
 
@@ -39,6 +49,11 @@ public class JwtTokenProvider {
         return decoded.getSubject();
     }
 
+    /**
+     * Méthode qui va valider le token
+     * @param token
+     * @return Authentication
+     */
     public Authentication validateToken(String token) {
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
 

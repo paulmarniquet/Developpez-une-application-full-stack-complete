@@ -27,11 +27,20 @@ public class PostController {
     @Autowired
     private final ArticleService articleService;
 
+    /**
+     * Route qui va récupérer les posts d'un article
+     * @param article_id
+     * @return
+     */
     @GetMapping("/post/{article_id}")
     public Optional<Post[]> getPostsOfArticle(@PathVariable Long article_id) {
         return postService.getPostsOfArticle(article_id);
     }
 
+    /**
+     * Route qui va sauvegarder un nouveau post
+     * @param post
+     */
     @PostMapping("/post")
     public Optional<Post> savePost(@RequestBody PostDto post) {
         Post newPost = new Post();
@@ -43,6 +52,10 @@ public class PostController {
         return postService.savePost(newPost);
     }
 
+    /**
+     * Route qui va récupérer tous les posts
+     * @return Iterable<Post>
+     */
     @GetMapping("/posts")
     public Iterable<Post> getPosts() {
         return postService.getPosts();

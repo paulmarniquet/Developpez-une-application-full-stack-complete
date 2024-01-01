@@ -12,6 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
+import java.util.Collections;
+
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
@@ -28,16 +30,17 @@ public class SecurityConfig {
                     CorsConfiguration config = new CorsConfiguration();
                     config.addAllowedHeader("*");
                     config.addAllowedMethod("*");
-                    config.addAllowedOrigin("*");
-/*                    config.setAllowedOrigins(Collections.singletonList(("http://localhost:4200")));*/
+                    config.setAllowedOrigins(Collections.singletonList(("http://localhost:4200")));
                     return config;
                 }))
                 .csrf().disable()
-                .authorizeRequests(authorizeRequests ->
-                        authorizeRequests.anyRequest().permitAll())
+                .authorizeRequests(
+                        authorizeRequests -> authorizeRequests
+                                .antMatchers("/api/auth/**").permitAll()
+                                .antMatchers("/api/**").authenticated()
+                                .anyRequest().permitAll())
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
         return http.build();
     }
 

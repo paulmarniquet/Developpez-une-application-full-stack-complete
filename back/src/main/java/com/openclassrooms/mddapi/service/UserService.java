@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.nio.CharBuffer;
 import java.util.Optional;
 
@@ -80,4 +81,19 @@ public class UserService {
             throw new RuntimeException("Password is incorrect");
         }
     }
+
+/*    public String extractTokenFromRequest(HttpServletRequest request) {
+        String bearerToken = request.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }
+        return null;
+    }
+
+    public User me(HttpServletRequest request) {
+        String token = extractTokenFromRequest(request);
+        String email = new JwtTokenProvider().getUsernameFromToken(token);
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }*/
 }

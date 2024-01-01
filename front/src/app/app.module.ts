@@ -19,6 +19,7 @@ import { PostComponent } from './components/post/post.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatSelectModule} from "@angular/material/select";
 import { CreatePostComponent } from './components/create-post/create-post.component';
+import {JwtInterceptor} from "./interceptor/JwtInterceptor";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, TopicsComponent, ArticleComponent, ProfileComponent, TopicComponent, CreateArticleComponent, PostComponent, CreatePostComponent],
@@ -32,9 +33,7 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
         MatSelectModule
     ],
   providers: [
-/*
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-*/
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

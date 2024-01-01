@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HeaderComponent} from '../../../components/header/header.component';
 import {AuthService} from "../../../services/auth.service";
 import {LoginDto} from "../../../dto/login-dto.interface";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -9,14 +10,12 @@ import {LoginDto} from "../../../dto/login-dto.interface";
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    user: any;
-    password: any;
+    user!: string;
+    password!: string;
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService, private router: Router) { }
 
-
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     login() {
         const request: LoginDto = {
@@ -24,7 +23,8 @@ export class LoginComponent implements OnInit {
             password: this.password
         }
         this.authService.login(request).subscribe((res: any) => {
-            console.log(res);
+            localStorage.setItem('token', res.token);
+            this.router.navigate(['/articles']);
         });
     }
 

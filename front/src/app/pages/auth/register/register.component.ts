@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../services/auth.service";
 import {RegisterDto} from "../../../dto/register-dto.interface";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -12,10 +13,9 @@ export class RegisterComponent implements OnInit {
     password!: string;
     username!: string;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
     register() {
         const request: RegisterDto = {
@@ -24,7 +24,8 @@ export class RegisterComponent implements OnInit {
             name: this.username
         }
         this.authService.register(request).subscribe((res: any) => {
-            console.log(res);
+            localStorage.setItem('token', res.token);
+            this.router.navigate(['/articles']);
         });
     }
 }

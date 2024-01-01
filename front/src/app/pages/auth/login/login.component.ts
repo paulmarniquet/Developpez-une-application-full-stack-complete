@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
     login() {
         const request: LoginDto = {
-            email: this.user,
+            emailOrUsername: this.user,
             password: this.password
         }
         this.authService.login(request).subscribe((res: any) => {

@@ -56,7 +56,7 @@ public class UserService {
     }
 
     public JwtTokenDto register(RegisterDto request) {
-        if (userRepository.findByEmail(request.email).isPresent()) {
+        if (userRepository.findByEmail(request.email).isPresent() || userRepository.findByName(request.name).isPresent()) {
             throw new RuntimeException("User already exists");
         } else {
             User user = new User();
@@ -72,13 +72,19 @@ public class UserService {
     }
 
     public JwtTokenDto login(LoginDto request) {
-        User user = userRepository.findByEmail(request.email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        if (passwordEncoder.matches(CharBuffer.wrap(request.password), user.getPassword())) {
+        User userByEmail = userRepository.findByEmail(request.emailOrUsername)
+                .orElse(null);
+
+        User userByUsername = userRepository.findByName(request.emailOrUsername)
+                .orElse(null);
+
+        User user = (userByEmail != null) ? userByEmail : userByUsername;
+
+        if (user != null && passwordEncoder.matches(CharBuffer.wrap(request.password), user.getPassword())) {
             UserDto userDto = new UserDto(user.getEmail(), user.getPassword());
             return new JwtTokenDto(new JwtTokenProvider().generateToken(userDto));
         } else {
-            throw new RuntimeException("Password is incorrect");
+            throw new RuntimeException("User not found or password is incorrect");
         }
     }
 

@@ -1,10 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.config.JwtTokenProvider;
-import com.openclassrooms.mddapi.dto.JwtTokenDto;
-import com.openclassrooms.mddapi.dto.ProfileDto;
-import com.openclassrooms.mddapi.dto.RegisterDto;
-import com.openclassrooms.mddapi.dto.UserDto;
+import com.openclassrooms.mddapi.dto.*;
 import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
@@ -70,6 +67,17 @@ public class UserService {
             userDto.setEmail(user.getEmail());
             userDto.setName(user.getName());
             return new JwtTokenDto(new JwtTokenProvider().generateToken(userDto));
+        }
+    }
+
+    public JwtTokenDto login(LoginDto request) {
+        User user = userRepository.findByEmail(request.email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        if (passwordEncoder.matches(CharBuffer.wrap(request.password), user.getPassword())) {
+            UserDto userDto = new UserDto(user.getEmail(), user.getPassword());
+            return new JwtTokenDto(new JwtTokenProvider().generateToken(userDto));
+        } else {
+            throw new RuntimeException("Password is incorrect");
         }
     }
 }

@@ -1,9 +1,6 @@
 package com.openclassrooms.mddapi.controller;
 
-import com.openclassrooms.mddapi.dto.JwtTokenDto;
-import com.openclassrooms.mddapi.dto.ProfileDto;
-import com.openclassrooms.mddapi.dto.RegisterDto;
-import com.openclassrooms.mddapi.dto.UserDto;
+import com.openclassrooms.mddapi.dto.*;
 import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.service.UserService;
@@ -22,10 +19,20 @@ public class UserController {
     @Autowired
     private final UserService userService;
 
-    @PostMapping("/user")
+    @PostMapping("/auth/register")
     public ResponseEntity<Object> saveUser(@RequestBody RegisterDto user) {
         try {
             JwtTokenDto newUser = userService.register(user);
+            return ResponseEntity.ok(newUser);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/auth/login")
+    public ResponseEntity<Object> login(@RequestBody LoginDto user) {
+        try {
+            JwtTokenDto newUser = userService.login(user);
             return ResponseEntity.ok(newUser);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();

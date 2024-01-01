@@ -1,11 +1,15 @@
 package com.openclassrooms.mddapi.controller;
 
+import com.openclassrooms.mddapi.dto.JwtTokenDto;
 import com.openclassrooms.mddapi.dto.ProfileDto;
+import com.openclassrooms.mddapi.dto.RegisterDto;
+import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -17,6 +21,16 @@ public class UserController {
 
     @Autowired
     private final UserService userService;
+
+    @PostMapping("/user")
+    public ResponseEntity<Object> saveUser(@RequestBody RegisterDto user) {
+        try {
+            JwtTokenDto newUser = userService.register(user);
+            return ResponseEntity.ok(newUser);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
 
     @PutMapping("/user/1")
     public Optional<User> updateUser(/*@PathVariable Long id, */@RequestBody ProfileDto profile) {

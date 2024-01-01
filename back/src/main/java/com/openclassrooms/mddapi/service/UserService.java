@@ -34,24 +34,20 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> updateUser(ProfileDto profile) {
-        /*Long id = profile.getId();*/
-        Long id = 1L;
+    public Optional<User> updateUser(ProfileDto profile, Long id) {
         User user = userRepository.findById(id).get();
         user.setName(profile.getName());
         user.setEmail(profile.getEmail());
         return Optional.of(userRepository.save(user));
     }
 
-    public Optional<User> subscribe(Topic topic) {
-        Long id = 1L;
+    public Optional<User> subscribe(Long id, Topic topic) {
         User user = userRepository.findById(id).get();
         user.getTopics().add(topic);
         return Optional.of(userRepository.save(user));
     }
 
-    public Optional<User> unsubscribe(Topic topic) {
-        Long id = 1L;
+    public Optional<User> unsubscribe(Long id, Topic topic) {
         User user = userRepository.findById(id).get();
         user.getTopics().remove(topic);
         return Optional.of(userRepository.save(user));

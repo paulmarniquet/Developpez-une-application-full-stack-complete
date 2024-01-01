@@ -17,6 +17,9 @@ export class ArticlesComponent implements OnInit {
     public boolOrderDate: boolean = false;
 
     ngOnInit(): void {
+/*
+        console.log(localStorage.getItem('userID')!);
+*/
         this.getArticles();
     }
 

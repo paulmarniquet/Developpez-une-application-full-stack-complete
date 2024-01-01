@@ -23,7 +23,7 @@ export class TopicComponent implements OnInit {
     }
 
     isSubscribed(): boolean {
-        this.profileService.getProfile().subscribe((user: any) => {
+        this.profileService.getProfile(this.user_id).subscribe((user: any) => {
             for (let i = 0; i < user.topics.length; i++) {
                 if (user.topics[i].id === this.topic?.id) {
                     this.subscribed = true;

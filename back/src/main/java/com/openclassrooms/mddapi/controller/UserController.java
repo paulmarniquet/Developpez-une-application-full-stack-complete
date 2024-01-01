@@ -52,9 +52,9 @@ public class UserController {
     }
 
 
-    @PutMapping("/user/1")
-    public Optional<User> updateUser(/*@PathVariable Long id, */@RequestBody ProfileDto profile) {
-        return userService.updateUser(profile);
+    @PutMapping("/user/{id}")
+    public Optional<User> updateUser(@PathVariable Long id, @RequestBody ProfileDto profile) {
+        return userService.updateUser(profile, id);
     }
 
     @GetMapping("/user/{id}")
@@ -67,13 +67,13 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @PutMapping("/1/subscribe")
-    public Optional<User> subscribe(/*@PathVariable Long id, */@RequestBody Topic topic) {
-        return userService.subscribe(topic);
+    @PutMapping("/{id}/subscribe")
+    public Optional<User> subscribe(@PathVariable Long id, @RequestBody Topic topic) {
+        return userService.subscribe(id, topic);
     }
 
-    @PutMapping("/1/unsubscribe")
-    public Optional<User> unsubscribe(/*@PathVariable Long id, */@RequestBody Topic topic) {
-        return userService.unsubscribe(topic);
+    @PutMapping("/{id}/unsubscribe")
+    public Optional<User> unsubscribe(@PathVariable Long id, @RequestBody Topic topic) {
+        return userService.unsubscribe(id, topic);
     }
 }

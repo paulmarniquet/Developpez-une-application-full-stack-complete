@@ -14,12 +14,12 @@ export class ProfileService {
 
     constructor(private httpClient: HttpClient) {}
 
-    public getProfile() {
-        return this.httpClient.get(`${environment.api}${this.pathService}/1`);
+    public getProfile(userID: number) {
+        return this.httpClient.get(`${environment.api}${this.pathService}/${userID}`);
     }
 
-    public modifyProfile(profileDto: ProfileDto) {
-        return this.httpClient.put(`${environment.api}${this.pathService}/1`, profileDto);
+    public modifyProfile(profileDto: ProfileDto, userID: number) {
+        return this.httpClient.put(`${environment.api}${this.pathService}/${userID}`, profileDto);
     }
 
     public subscribeTopic(topic: Topic, user_id: number) {

@@ -33,6 +33,7 @@ public class User {
     @JoinTable(name = "subscriptions", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "topic_id"))
     private List<Topic> topics;
 
+    @UpdateTimestamp
     @Column(name="created_at")
     private Timestamp created_at;
 

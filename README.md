@@ -1,25 +1,68 @@
-# P6-Full-Stack-reseau-dev
+# Monde de développeurs
 
-## Front
+Le projet Monde de développeurs (MDD) est une application web permettant aux utilisateurs de lire/rédiger des articles liés à l'informatique. Les autres utilisateurs peuvent commenter les articles et ces derniers sont classés par thème. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+Cette application est développée dans le cadre de la formation de développeur fullstack Angular/Java d'OpenClassrooms.
 
-Don't forget to install your node_modules before starting (`npm install`).
+## Installation et Exécution
 
-### Development server
+### Frontend
+1. Récupérez le code source du frontend depuis [ce repértoire Github](https://github.com/paulmarniquet/Developpez-une-application-full-stack-complete).
+2. Lancez un terminal et rendez-vous dans le répertoire du frontend.
+3. Exécutez la commande suivante pour installer les dépendances :
+   ```
+   npm install
+   ```
+4. Démarrez le serveur de développement en exécutant :
+   ```
+   ng serve
+   ```
+   Le frontend sera accessible à l'adresse [localhost:4200](http://localhost:4200/).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Backend
+1. Exécutez la commande suivante pour installer les dépendances :
+   ```
+   mvn install
+   ```
+2. Démarrez le serveur backend avec la commande :
+   ```
+   mvn spring-boot:run
+   ```
+   Le backend sera accessible à l'adresse [localhost:9000](http://localhost:9000/).
 
-### Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Base de données
 
-### Where to start
+1. Créez une nouvelle base de données MySQL. L'ORM utilisé est Hibernate. Le schéma de la base de données est généré automatiquement.
+2. Créez un fichier `.env` dans le répertoire du backend.
+3. Ajoutez-y les informations de connexion à la base de données :
+   ```
+   MYSQL_USER=Utilisateur
+   MYSQL_PASSWORD=MotDePasse
+   MYSQL_URL=URL
+   ```
+   Remplacez les valeurs par vos identifiants SQL.
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+## Postman
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
+Vous pouvez utiliser le fichier `mdd` qui se trouve dans le dossier ` ressources/postman` pour tester les différentes routes de l'API.
 
-Good luck!
+## Technologies utilisées
+
+* Java 17
+* Spring Boot
+* MySQL
+* Hibernate
+* Maven
+* Angular
+* Angular Material
+* Tailwind CSS
+
+---
+
+### Contact
+
+Pour toute question ou commentaire, n'hésitez pas à me contacter sur mon mail : [paul.marniquet@gmail.com](mailto:paul.marniquet@email.com).
+
+---

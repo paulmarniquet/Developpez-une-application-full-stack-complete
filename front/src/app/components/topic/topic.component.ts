@@ -13,7 +13,6 @@ export class TopicComponent implements OnInit {
 
     @Input() topic?: Topic;
 
-    private user_id: number = Number(localStorage.getItem('userID')!);
     public subscribed!: boolean;
 
     constructor(private profileService: ProfileService) {}
@@ -23,7 +22,7 @@ export class TopicComponent implements OnInit {
     }
 
     isSubscribed(): boolean {
-        this.profileService.getProfile(this.user_id).subscribe((user: any) => {
+        this.profileService.getProfile(Number(localStorage.getItem('userID')!)).subscribe((user: any) => {
             for (let i = 0; i < user.topics.length; i++) {
                 if (user.topics[i].id === this.topic?.id) {
                     this.subscribed = true;
@@ -34,13 +33,13 @@ export class TopicComponent implements OnInit {
     }
 
     subscribeTo() {
-        this.profileService.subscribeTopic(this.topic!, this.user_id).subscribe(() => {
+        this.profileService.subscribeTopic(this.topic!, Number(localStorage.getItem('userID')!)).subscribe(() => {
             this.subscribed = true;
         });
     }
 
     unsubscribeTo() {
-        this.profileService.unsubscribeTopic(this.topic!, this.user_id).subscribe(() => {
+        this.profileService.unsubscribeTopic(this.topic!, Number(localStorage.getItem('userID')!)).subscribe(() => {
             this.subscribed = false;
         });
     }

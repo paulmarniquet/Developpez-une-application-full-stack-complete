@@ -31,6 +31,7 @@ public class Post {
     @Column(name="content")
     private String content;
 
+    @UpdateTimestamp
     @Column(name="created_at")
     private Timestamp created_at;
 

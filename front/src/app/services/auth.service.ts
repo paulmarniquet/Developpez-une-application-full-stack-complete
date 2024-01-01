@@ -21,4 +21,8 @@ export class AuthService {
     public login(request: LoginDto) {
         return this.httpClient.post(`${environment.api}${this.pathService}/login`, request);
     }
+
+    public me() {
+        return this.httpClient.get(`${environment.api}${this.pathService}/me`);
+    }
 }

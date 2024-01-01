@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ArticlesService} from '../../services/articles.service';
 import {Observable} from 'rxjs';
 import {Article} from "../../interfaces/article.interface";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
     selector: 'app-articles',
@@ -11,7 +12,7 @@ import {Article} from "../../interfaces/article.interface";
 export class ArticlesComponent implements OnInit {
     constructor(private articleService: ArticlesService) {}
 
-    public articles$: Observable<Article[]> = this.articleService.getFeed(1);
+    public articles$: Observable<Article[]> = this.articleService.getFeed(Number(localStorage.getItem('userID')!));
     public articles: Article[] = [];
     public boolOrderDate: boolean = false;
 

@@ -30,13 +30,16 @@ public class SecurityConfig {
                     CorsConfiguration config = new CorsConfiguration();
                     config.addAllowedHeader("*");
                     config.addAllowedMethod("*");
+                    config.addAllowedOrigin("*");
+/*
                     config.setAllowedOrigins(Collections.singletonList(("http://localhost:4200")));
+*/
                     return config;
                 }))
                 .csrf().disable()
                 .authorizeRequests(
                         authorizeRequests -> authorizeRequests
-                                .antMatchers("/api/auth/**").permitAll()
+                                .antMatchers("/api/auth/login", "/api/auth/register").permitAll()
                                 .antMatchers("/api/**").authenticated()
                                 .anyRequest().permitAll())
                 .sessionManagement(sessionManagement ->

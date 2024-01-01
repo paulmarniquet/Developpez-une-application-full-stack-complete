@@ -36,11 +36,10 @@ export class CreatePostComponent implements OnInit {
     }
 
     createPost() {
-        console.log(this.comment);
         this.postsService.createPost({
             content: this.comment,
             articleId: this.article!.id,
-            userId: 1,
+            userId: Number(localStorage.getItem('userID')!),
         }).subscribe(post => {
         });
     }

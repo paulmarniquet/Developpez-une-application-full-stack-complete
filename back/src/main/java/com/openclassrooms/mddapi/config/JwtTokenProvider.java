@@ -4,7 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.openclassrooms.mddapi.dto.UserDto;
+import com.openclassrooms.mddapi.dto.LoginDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,12 +17,13 @@ import java.util.Date;
 public class JwtTokenProvider {
     private final String secretKey = "laclésecretesisi";
 
-    public String generateToken(UserDto user) {
+    public String generateToken(LoginDto user) {
         Date now = new Date();
         Date validity = new Date(now.getTime() + 3600000);
+
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
         return JWT.create()
-                .withSubject(user.getEmail())
+                .withSubject(user.getEmailOrUsername())
                 .withIssuedAt(now)
                 .withExpiresAt(validity)
                 .sign(algorithm);
@@ -30,8 +31,10 @@ public class JwtTokenProvider {
 
     public String getUsernameFromToken(String token) {
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
+
         JWTVerifier verifier = JWT.require(algorithm)
                 .build();
+
         DecodedJWT decoded = verifier.verify(token);
         return decoded.getSubject();
     }
@@ -43,9 +46,9 @@ public class JwtTokenProvider {
                 .build();
         DecodedJWT decoded = verifier.verify(token);
 
-        UserDto user = UserDto.builder()
-                .email(decoded.getSubject())
-                .build();
+        LoginDto user = new LoginDto();
+        user.setEmailOrUsername(decoded.getSubject());
+
         return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
     }
 }

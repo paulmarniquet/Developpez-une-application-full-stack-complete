@@ -13,7 +13,7 @@ export class TopicComponent implements OnInit {
 
     @Input() topic?: Topic;
 
-    private user_id: number = 1;
+    private user_id: number = Number(localStorage.getItem('userID')!);
     public subscribed!: boolean;
 
     constructor(private profileService: ProfileService) {}

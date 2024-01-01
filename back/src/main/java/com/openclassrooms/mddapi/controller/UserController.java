@@ -6,9 +6,11 @@ import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @RestController
@@ -38,6 +40,17 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @GetMapping("/auth/me")
+    public ResponseEntity<Long> me(HttpServletRequest request) {
+        try {
+            Long user = userService.me(request);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
 
     @PutMapping("/user/1")
     public Optional<User> updateUser(/*@PathVariable Long id, */@RequestBody ProfileDto profile) {

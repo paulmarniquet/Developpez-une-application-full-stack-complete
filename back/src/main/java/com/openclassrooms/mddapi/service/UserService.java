@@ -7,6 +7,8 @@ import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -64,31 +66,33 @@ public class UserService {
             user.setName(request.name);
             user.setPassword(passwordEncoder.encode(String.valueOf(CharBuffer.wrap(request.getPassword()))));
             userRepository.save(user);
-            UserDto userDto = new UserDto();
-            userDto.setEmail(user.getEmail());
-            userDto.setName(user.getName());
-            return new JwtTokenDto(new JwtTokenProvider().generateToken(userDto));
+            LoginDto loginDto = new LoginDto();
+            loginDto.setEmailOrUsername(request.email);
+            loginDto.setPassword(request.getPassword());
+            return new JwtTokenDto(new JwtTokenProvider().generateToken(loginDto));
         }
     }
 
     public JwtTokenDto login(LoginDto request) {
-        User userByEmail = userRepository.findByEmail(request.emailOrUsername)
+        User userByEmail = userRepository.findByEmail(request.getEmailOrUsername())
                 .orElse(null);
 
-        User userByUsername = userRepository.findByName(request.emailOrUsername)
+        User userByUsername = userRepository.findByName(request.getEmailOrUsername())
                 .orElse(null);
 
         User user = (userByEmail != null) ? userByEmail : userByUsername;
 
-        if (user != null && passwordEncoder.matches(CharBuffer.wrap(request.password), user.getPassword())) {
-            UserDto userDto = new UserDto(user.getEmail(), user.getPassword());
-            return new JwtTokenDto(new JwtTokenProvider().generateToken(userDto));
+        if (user != null && passwordEncoder.matches(CharBuffer.wrap(request.getPassword()), user.getPassword())) {
+            LoginDto loginDto = new LoginDto();
+            loginDto.setEmailOrUsername(user.getEmail());
+            loginDto.setPassword(user.getPassword());
+            return new JwtTokenDto(new JwtTokenProvider().generateToken(loginDto));
         } else {
             throw new RuntimeException("User not found or password is incorrect");
         }
     }
 
-/*    public String extractTokenFromRequest(HttpServletRequest request) {
+    public String extractTokenFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
@@ -96,10 +100,10 @@ public class UserService {
         return null;
     }
 
-    public User me(HttpServletRequest request) {
+    public Long me(HttpServletRequest request) {
         String token = extractTokenFromRequest(request);
         String email = new JwtTokenProvider().getUsernameFromToken(token);
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-    }*/
+        Optional<User> user = userRepository.findByEmail(email);
+        return user.get().getId();
+    }
 }

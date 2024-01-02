@@ -10,21 +10,17 @@ import {AuthService} from "../../services/auth.service";
     styleUrls: ['./articles.component.scss']
 })
 export class ArticlesComponent implements OnInit {
-    constructor(private articleService: ArticlesService) {}
+    constructor(private articleService: ArticlesService, private authService: AuthService) {}
 
-    public articles$: Observable<Article[]> = this.articleService.getFeed(Number(localStorage.getItem('userID')!));
     public articles: Article[] = [];
     public boolOrderDate: boolean = false;
 
     ngOnInit(): void {
-/*
-        console.log(localStorage.getItem('userID')!);
-*/
         this.getArticles();
     }
 
     public getArticles(): void {
-        this.articles$.subscribe({
+        this.articleService.getFeed(Number(localStorage.getItem('userID')!)).subscribe({
             next: (articles: Article[]) => {
                 this.articles = articles;
             },

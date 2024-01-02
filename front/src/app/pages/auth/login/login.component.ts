@@ -28,14 +28,13 @@ export class LoginComponent implements OnInit {
             this.matSnackBar.open('You are logged in', 'Close', {
                 duration: 2000,
             });
-            this.router.navigate(['/articles']);
+            this.authService.me().subscribe(
+                (user: any) => {
+                    localStorage.setItem('userID', JSON.stringify(user));
+                    this.router.navigate(['/articles']);
+                }
+            );
         });
-
-        this.authService.me().subscribe(
-            (user: any) => {
-                localStorage.setItem('userID', JSON.stringify(user));
-            }
-        );
     }
 
 }

@@ -26,16 +26,15 @@ export class RegisterComponent implements OnInit {
         }
         this.authService.register(request).subscribe((res: any) => {
             localStorage.setItem('token', res.token);
-            this.router.navigate(['/articles']);
+            this.authService.me().subscribe(
+                (user: any) => {
+                    localStorage.setItem('userID', JSON.stringify(user));
+                    this.router.navigate(['/articles']);
+                }
+            );
             this.matSnackBar.open('You are registered', 'Close', {
                 duration: 2000,
             });
         });
-
-        this.authService.me().subscribe(
-            (user: any) => {
-                localStorage.setItem('userID', JSON.stringify(user));
-            }
-        );
     }
 }

@@ -42,6 +42,7 @@ export class CreatePostComponent implements OnInit {
             articleId: this.article!.id,
             userId: Number(localStorage.getItem('userID')!),
         }).subscribe(post => {
+            this.getPostsOfArticle(this.article!);
             this.matSnackBar.open('Comment posted', 'Close', {
                 duration: 2000,
             });

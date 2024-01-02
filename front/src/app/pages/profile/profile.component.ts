@@ -3,7 +3,7 @@ import {ProfileService} from "../../services/profile.service";
 import {User} from "../../interfaces/user.interface";
 import {Topic} from "../../interfaces/topic.interface";
 import {Router} from "@angular/router";
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
             name: this.username,
             email: this.email,
         }, Number(localStorage.getItem('userID')!)).subscribe(() => {
-            this.router.navigate(['/articles']);
+            this.router.navigate(['/me']);
             this.matSnackBar.open('Profile updated', 'Close', {
                 duration: 2000,
             });

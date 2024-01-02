@@ -1,4 +1,5 @@
 import {User} from "./user.interface";
+import {Topic} from "./topic.interface";
 
 export interface Article {
     id: number,
@@ -6,5 +7,5 @@ export interface Article {
     title: string,
     createdAt: string,
     user: User,
-    topic_id: number,
+    topic: Topic,
 }

@@ -4,6 +4,7 @@ import com.openclassrooms.mddapi.dto.ArticleDto;
 import com.openclassrooms.mddapi.entity.Article;
 import com.openclassrooms.mddapi.service.ArticleService;
 import com.openclassrooms.mddapi.service.TopicService;
+import com.openclassrooms.mddapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,9 @@ public class ArticleController {
 
     @Autowired
     private final TopicService topicService;
+
+    @Autowired
+    private final UserService userService;
 
     /**
      * Route qui va récupérer un article à partir de son id
@@ -51,7 +55,7 @@ public class ArticleController {
     }
 
     /**
-     * Route qui va supprimer un article à partir de son id
+     * Route qui va enregister un nouvel article
      * @return Nouvel Article
      */
     @PostMapping("/articles")
@@ -60,6 +64,7 @@ public class ArticleController {
         newArticle.setTitle(article.getTitle());
         newArticle.setContent(article.getContent());
         newArticle.setTopic(topicService.getTopic(article.getTopicId()).get());
+        newArticle.setUser(userService.getUser(article.getUserId()).get());
         return articleService.saveArticle(newArticle);
     }
 }

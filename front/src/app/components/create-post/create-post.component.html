@@ -12,7 +12,7 @@
         <h2>{{ article?.title }} </h2>
         <div class="flex justify-between w-1/4 my-4">
             <p>{{ article?.createdAt }}</p>
-            <p>{{ article?.user_id }} </p>
+            <p>{{ article?.user?.name }} </p>
             <p>{{ article?.topic_id }} </p>
         </div>
         <div class="flex max-w-full h-auto">

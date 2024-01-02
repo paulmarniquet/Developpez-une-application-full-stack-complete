@@ -19,8 +19,7 @@ export class ArticleComponent implements OnInit {
     constructor(private httpClient: HttpClient, private router: Router) {
     }
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     formatDate(date: string): string {
         return new Date(date).toLocaleString('fr-FR', {

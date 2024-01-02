@@ -33,6 +33,7 @@ export class CreateArticleComponent implements OnInit {
             title: this.titreArticle!,
             content: this.contenuArticle!,
             topicId: this.themeArticle!,
+            userId: Number(localStorage.getItem('userID')!),
         }).subscribe(() => {
             this.router.navigate(['/articles']);
             this.matSnackBar.open('Article created', 'Close', {

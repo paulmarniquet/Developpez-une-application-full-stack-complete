@@ -15,14 +15,15 @@ import { ArticleComponent } from './components/article/article.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TopicComponent } from './components/topic/topic.component';
 import { CreateArticleComponent } from './components/create-article/create-article.component';
-import { PostComponent } from './components/post/post.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatSelectModule} from "@angular/material/select";
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import {JwtInterceptor} from "./interceptor/JwtInterceptor";
+import {MatIconModule} from "@angular/material/icon";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, TopicsComponent, ArticleComponent, ProfileComponent, TopicComponent, CreateArticleComponent, PostComponent, CreatePostComponent],
+  declarations: [AppComponent, HomeComponent, LoginComponent, RegisterComponent, HeaderComponent, ArticlesComponent, TopicsComponent, ArticleComponent, ProfileComponent, TopicComponent, CreateArticleComponent, CreatePostComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -30,7 +31,9 @@ import {JwtInterceptor} from "./interceptor/JwtInterceptor";
         MatButtonModule,
         FormsModule,
         HttpClientModule,
-        MatSelectModule
+        MatSelectModule,
+        MatIconModule,
+        MatSnackBarModule
     ],
   providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

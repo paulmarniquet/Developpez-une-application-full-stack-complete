@@ -4,6 +4,7 @@ import {Article} from "../../interfaces/article.interface";
 import {ArticlesService} from "../../services/articles.service";
 import {PostsService} from "../../services/posts.service";
 import {Post} from "../../interfaces/post.interface";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-create-post',
@@ -16,7 +17,7 @@ export class CreatePostComponent implements OnInit {
     protected posts?: Post[];
     protected comment: any;
 
-    constructor(private route: ActivatedRoute, private articlesService: ArticlesService, private postsService: PostsService) {
+    constructor(private route: ActivatedRoute, private articlesService: ArticlesService, private postsService: PostsService, private matSnackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
@@ -41,6 +42,9 @@ export class CreatePostComponent implements OnInit {
             articleId: this.article!.id,
             userId: Number(localStorage.getItem('userID')!),
         }).subscribe(post => {
+            this.matSnackBar.open('Comment posted', 'Close', {
+                duration: 2000,
+            });
         });
     }
 }

@@ -1,7 +1,7 @@
 <app-header></app-header>
 <section class="px-20 py-10">
     <div class="h-24 flex justify-between items-center mobile:flex-col">
-        <button routerLink="/articles/create" class="bg-bluefont text-white px-8 py-2 m-3 text-lg rounded-lg mobile:mb-4 hover:bg-white hover:text-bluefont">Créer un article</button>
+        <button mat-raised-button color="primary" routerLink="/articles/create" class="w-44 h-12 px-8 py-2 m-3 text-lg rounded-lg mobile:mb-4">Créer un article</button>
         <div class="flex items-center cursor-pointer">
             <a (click)="filterByDate()" class="text-xl font-bold">Trier par</a>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

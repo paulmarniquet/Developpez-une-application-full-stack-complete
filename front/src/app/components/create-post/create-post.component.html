@@ -39,13 +39,9 @@
             <ng-form class="flex mt-10 h-32" style="width:600px">
                 <textarea name="comment" [(ngModel)]="comment" required placeholder="Ecrivez ici votre commentaire"
                           class="w-screen p-2 rounded-2xl border-2 border-black"></textarea>
-                <button (click)="createPost()"
-                        class="border-2 border-black rounded-full flex justify-center items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         stroke-width="1.5"
-                         stroke="currentColor" class="w-10 h-10">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                    </svg>
+                <button mat-fab	color="primary" (click)="createPost()"
+                        class="bg-black text-white rounded-full w-16 h-16 ml-4 top-8 left-5">
+                    <mat-icon>add</mat-icon>
                 </button>
             </ng-form>
         </div>

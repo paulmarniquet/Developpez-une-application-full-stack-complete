@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../../services/auth.service";
 import {RegisterDto} from "../../../dto/register-dto.interface";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,7 @@ export class RegisterComponent implements OnInit {
     password!: string;
     username!: string;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private matSnackBar: MatSnackBar) { }
 
   ngOnInit(): void {}
 
@@ -26,6 +27,9 @@ export class RegisterComponent implements OnInit {
         this.authService.register(request).subscribe((res: any) => {
             localStorage.setItem('token', res.token);
             this.router.navigate(['/articles']);
+            this.matSnackBar.open('You are registered', 'Close', {
+                duration: 2000,
+            });
         });
 
         this.authService.me().subscribe(

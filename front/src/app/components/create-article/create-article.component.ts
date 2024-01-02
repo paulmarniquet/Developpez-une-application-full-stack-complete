@@ -4,6 +4,7 @@ import {ArticlesService} from "../../services/articles.service";
 import {TopicService} from "../../services/topic.service";
 import {Topic} from "../../interfaces/topic.interface";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'app-create-article',
@@ -18,7 +19,7 @@ export class CreateArticleComponent implements OnInit {
     private articleService: ArticlesService = new ArticlesService(this.httpClient);
     private topicService: TopicService = new TopicService(this.httpClient);
 
-    constructor(private httpClient: HttpClient, private router : Router) {
+    constructor(private httpClient: HttpClient, private router : Router, private matSnackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
@@ -34,6 +35,9 @@ export class CreateArticleComponent implements OnInit {
             topicId: this.themeArticle!,
         }).subscribe(() => {
             this.router.navigate(['/articles']);
+            this.matSnackBar.open('Article created', 'Close', {
+                duration: 2000,
+            });
         });
     }
 }

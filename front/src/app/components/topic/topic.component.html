@@ -3,13 +3,13 @@
     <p>{{ topic?.content }}</p>
     <div class="flex justify-center">
         <ng-container *ngIf="!subscribed; else elseBlock">
-            <button (click)="subscribeTo()" class="bg-bluefont hover:bg-white hover:text-bluefont text-white font-bold w-1/4 py-2 rounded">
+            <button mat-raised-button color="primary" (click)="subscribeTo()" class="font-bold py-2 rounded">
                 S'abonner
             </button>
         </ng-container>
 
         <ng-template #elseBlock>
-            <button (click)="unsubscribeTo()" class="bg-bluefont hover:bg-white hover:text-bluefont text-white font-bold w-1/4 py-2 rounded">
+            <button mat-raised-button color="warn" (click)="unsubscribeTo()" class="font-bold py-2 rounded">
                 Se désabonner
             </button>
         </ng-template>

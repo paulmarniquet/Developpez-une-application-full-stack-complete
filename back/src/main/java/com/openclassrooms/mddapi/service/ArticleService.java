@@ -17,13 +17,10 @@ import java.util.Optional;
 @Service
 public class ArticleService {
 
-    @Autowired
     private final TopicService topicService;
 
-    @Autowired
     private final UserService userService;
 
-    @Autowired
     private final ArticleRepository articleRepository;
 
     /**

@@ -12,7 +12,6 @@ import java.util.Optional;
 @Service
 public class TopicService {
 
-    @Autowired
     private final TopicRepository topicRepository;
 
     /**

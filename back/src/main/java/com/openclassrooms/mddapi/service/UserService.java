@@ -6,9 +6,6 @@ import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +17,6 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    @Autowired
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;

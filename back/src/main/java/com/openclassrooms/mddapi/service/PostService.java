@@ -12,16 +12,15 @@ import java.util.Optional;
 @Service
 public class PostService {
 
-    @Autowired
     private final PostRepository postRepository;
 
     /**
      * Récupère les posts d'un article
-     * @param article_id
+     * @param articleId
      * @return
      */
-    public Optional<Post[]> getPostsOfArticle(Long article_id) {
-        return postRepository.findByArticleId(article_id);
+    public Optional<Post[]> getPostsOfArticle(Long articleId) {
+        return postRepository.findByArticleId(articleId);
     }
 
     /**

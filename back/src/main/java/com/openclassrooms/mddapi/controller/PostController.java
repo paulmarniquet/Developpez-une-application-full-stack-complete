@@ -29,13 +29,13 @@ public class PostController {
     /**
      * Route qui va récupérer les posts d'un article
      *
-     * @param article_id
+     * @param articleId
      * @return
      */
-    @GetMapping("/post/{article_id}")
-    public ResponseEntity<Optional<Post[]>> getPostsOfArticle(@PathVariable Long article_id) {
+    @GetMapping("/post/{articleId}")
+    public ResponseEntity<Optional<Post[]>> getPostsOfArticle(@PathVariable Long articleId) {
         try {
-            Optional<Post[]> posts = postService.getPostsOfArticle(article_id);
+            Optional<Post[]> posts = postService.getPostsOfArticle(articleId);
             return ResponseEntity.ok(posts);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();

@@ -43,13 +43,13 @@ public class ArticleController {
     /**
      * Route qui va récupérer les articles d'un utilisateur
      *
-     * @param user_id
+     * @param userId
      * @return Iterable<Article>
      */
-    @GetMapping("/feed/{user_id}")
-    public ResponseEntity<Iterable<Article>> getFeed(@PathVariable Long user_id) {
+    @GetMapping("/feed/{userId}")
+    public ResponseEntity<Iterable<Article>> getFeed(@PathVariable Long userId) {
         try {
-            Iterable<Article> articles = articleService.getFeed(user_id);
+            Iterable<Article> articles = articleService.getFeed(userId);
             return ResponseEntity.ok(articles);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();

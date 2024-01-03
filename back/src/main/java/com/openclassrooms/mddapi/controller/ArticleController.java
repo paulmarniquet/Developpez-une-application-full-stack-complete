@@ -6,13 +6,15 @@ import com.openclassrooms.mddapi.service.ArticleService;
 import com.openclassrooms.mddapi.service.TopicService;
 import com.openclassrooms.mddapi.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
+@Validated
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class ArticleController {
@@ -30,9 +32,13 @@ public class ArticleController {
      * @return Optional<Article>
      */
     @GetMapping("/article/{id}")
-    public ResponseEntity<Article> getArticle(@PathVariable Long id) {
-        Optional<Article> optionalArticle = articleService.getArticle(id);
-        return optionalArticle.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<Optional<Article>> getArticle(@PathVariable Long id) {
+        try {
+            Optional<Article> optionalArticle = articleService.getArticle(id);
+            return ResponseEntity.ok(optionalArticle);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     /**
@@ -43,8 +49,12 @@ public class ArticleController {
      */
     @GetMapping("/feed/{user_id}")
     public ResponseEntity<Iterable<Article>> getFeed(@PathVariable Long user_id) {
-        Iterable<Article> articles = articleService.getFeed(user_id);
-        return ResponseEntity.ok(articles);
+        try {
+            Iterable<Article> articles = articleService.getFeed(user_id);
+            return ResponseEntity.ok(articles);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     /**
@@ -54,17 +64,22 @@ public class ArticleController {
      */
     @GetMapping("/articles")
     public ResponseEntity<Iterable<Article>> getArticles() {
-        Iterable<Article> articles = articleService.getArticles();
-        return ResponseEntity.ok(articles);
+        try {
+            Iterable<Article> articles = articleService.getArticles();
+            return ResponseEntity.ok(articles);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     /**
      * Route qui va enregister un nouvel article
+     *
      * @param article
      * @return Nouvel Article
      */
     @PostMapping("/articles")
-    public ResponseEntity<Article> saveArticle(@RequestBody ArticleDto article) {
+    public ResponseEntity<Article> saveArticle(@RequestBody @Valid ArticleDto article) {
         try {
             Article newArticle = new Article();
             newArticle.setTitle(article.getTitle());

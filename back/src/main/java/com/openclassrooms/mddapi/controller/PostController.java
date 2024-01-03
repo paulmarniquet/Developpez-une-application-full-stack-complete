@@ -9,11 +9,13 @@ import com.openclassrooms.mddapi.service.PostService;
 import com.openclassrooms.mddapi.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
+@Validated
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class PostController {
@@ -46,7 +48,7 @@ public class PostController {
      * @param post
      */
     @PostMapping("/post")
-    public ResponseEntity<Post> savePost(@RequestBody PostDto post) {
+    public ResponseEntity<Post> savePost(@Valid @RequestBody PostDto post) {
         try {
             Post newPost = new Post();
             newPost.setContent(post.getContent());

@@ -23,6 +23,7 @@ public class UserController {
 
     /**
      * Route qui va enregistrer un nouvel utilisateur
+     *
      * @param user
      * @return
      */
@@ -39,16 +40,12 @@ public class UserController {
 
     /**
      * Route qui va connecter un utilisateur
+     *
      * @param user
      * @return
      */
     @PostMapping("/auth/login")
     public ResponseEntity<Object> login(@Valid @RequestBody LoginDto user) {
-        if (user.getEmailOrUsername() == null || user.getEmailOrUsername().isEmpty() ||
-                user.getPassword() == null || user.getPassword().isEmpty()) {
-            return ResponseEntity.badRequest().body("Veuillez fournir un email/nom d'utilisateur et un mot de passe valides.");
-        }
-
         try {
             JwtTokenDto newUser = userService.login(user);
             return ResponseEntity.ok(newUser);
@@ -59,6 +56,7 @@ public class UserController {
 
     /**
      * Route qui va récupérer les informations de l'utilisateur connecté
+     *
      * @param request
      * @return
      */
@@ -74,51 +72,81 @@ public class UserController {
 
     /**
      * Route qui va mettre à jour les informations de l'utilisateur
+     *
      * @param id
      * @param profile
      * @return
      */
     @PutMapping("/user/{id}")
-    public Optional<User> updateUser(@PathVariable Long id, @RequestBody ProfileDto profile) {
-        return userService.updateUser(profile, id);
+    public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody ProfileDto profile) {
+        try {
+            Optional<User> user = userService.updateUser(profile, id);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Informations invalides");
+        }
     }
 
     /**
      * Route qui va récupérer un utilisateur à partir de son id
+     *
      * @param id
      * @return
      */
     @GetMapping("/user/{id}")
-    public Optional<User> getUser(@PathVariable Long id) {
-        return userService.getUser(id);
+    public ResponseEntity<Optional<User>> getUser(@PathVariable Long id) {
+        try {
+            Optional<User> user = userService.getUser(id);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Optional.empty());
+        }
     }
 
     /**
      * Route qui va récupérer tous les utilisateurs
+     *
      * @return Iterable<User>
      */
     @GetMapping("/users")
-    public Iterable<User> getUsers() {
-        return userService.getUsers();
+    public ResponseEntity<Iterable<User>> getUsers() {
+        try {
+            Iterable<User> user = userService.getUsers();
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 
     /**
      * Route qui va ajouter un abonnement à un utilisateur
+     *
      * @param id
      * @return Iterable<Topic>
      */
     @PutMapping("/{id}/subscribe")
-    public Optional<User> subscribe(@PathVariable Long id, @RequestBody Topic topic) {
-        return userService.subscribe(id, topic);
+    public ResponseEntity<Optional<User>> subscribe(@PathVariable Long id, @RequestBody Topic topic) {
+        try {
+            Optional<User> user = userService.subscribe(id, topic);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Optional.empty());
+        }
     }
 
     /**
      * Route qui va supprimer un abonnement à un utilisateur
+     *
      * @param id
      * @return Iterable<Topic>
      */
     @PutMapping("/{id}/unsubscribe")
-    public Optional<User> unsubscribe(@PathVariable Long id, @RequestBody Topic topic) {
-        return userService.unsubscribe(id, topic);
+    public ResponseEntity<Optional<User>> unsubscribe(@PathVariable Long id, @RequestBody Topic topic) {
+        try {
+            Optional<User> user = userService.unsubscribe(id, topic);
+            return ResponseEntity.ok(user);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Optional.empty());
+        }
     }
 }

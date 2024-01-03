@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
             this.router.navigate(['/me']);
             this.matSnackBar.open('Profile updated', 'Close', {
                 duration: 2000,
+                panelClass: ['greenToast']
             });
 
         });

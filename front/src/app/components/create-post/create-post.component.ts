@@ -25,7 +25,6 @@ export class CreatePostComponent implements OnInit {
         if (id != null) {
             this.articlesService.getArticle(parseInt(id)).subscribe(article => {
                 this.article = article;
-                console.log(this.article)
                 this.article!.createdAt = new Date(article!.createdAt).toLocaleString('fr-FR', {
                     year: 'numeric',
                     month: 'numeric',
@@ -51,6 +50,7 @@ export class CreatePostComponent implements OnInit {
             this.getPostsOfArticle(this.article!);
             this.matSnackBar.open('Comment posted', 'Close', {
                 duration: 2000,
+                panelClass: ['greenToast']
             });
             this.comment = '';
         });

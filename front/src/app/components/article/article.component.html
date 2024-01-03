@@ -1,8 +1,9 @@
-<div (click)="addPost()" class="articleComponent cursor-pointer p-4 flex-col bg-gray-200 rounded-xl">
+<div (click)="addPost()"
+     class="articleComponent cursor-pointer p-4 flex-col bg-gray-200 rounded-xl w-auto max-h-[400px] overflow-hidden">
     <p class="font-bold text-xl">{{ article?.title }}</p>
     <div class="flex">
         <p class="text-lg w-1/2">{{ formatDate(article?.createdAt!) }}</p>
-        <p class="text-lg w-fit">{{ article?.user?.name }}</p>
+        <p class="text-lg">{{ article?.user?.name }}</p>
     </div>
-    <p>{{ article?.content }}</p>
+    <p class="line-clamp-3 max-h-[300px] mobile:w-48 min-h-[60px]">{{ article?.content }}</p>
 </div>

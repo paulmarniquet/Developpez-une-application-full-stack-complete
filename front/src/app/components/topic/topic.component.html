@@ -1,6 +1,6 @@
-<div class="themeComponent p-4 flex-col bg-gray-200 rounded-xl">
+<div class="themeComponent p-4 flex-col bg-gray-200 rounded-xl h-auto min-h-[60px] max-h-[400px]">
     <p class="font-bold text-xl">{{ topic?.title }}</p>
-    <p>{{ topic?.content }}</p>
+    <p class="line-clamp-3 max-h-[300px] mobile:w-48 min-h-[40px]">{{ topic?.content }}</p>
     <div class="flex justify-center">
         <ng-container *ngIf="!subscribed; else elseBlock">
             <button mat-raised-button color="primary" (click)="subscribeTo()" class="font-bold py-2 rounded">
@@ -14,5 +14,4 @@
             </button>
         </ng-template>
     </div>
-
 </div>

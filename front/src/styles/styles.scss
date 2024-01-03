@@ -7,3 +7,15 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.greenToast {
+    background-color: #59ed9c;
+    color: white;
+}
+
+.mat-simple-snackbar-action {
+    color: white !important;
+}
+
+.redToast {
+    background-color: red;
+}

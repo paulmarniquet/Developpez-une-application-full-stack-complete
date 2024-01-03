@@ -38,6 +38,7 @@ export class CreateArticleComponent implements OnInit {
             this.router.navigate(['/articles']);
             this.matSnackBar.open('Article created', 'Close', {
                 duration: 2000,
+                panelClass: ['greenToast']
             });
         });
     }

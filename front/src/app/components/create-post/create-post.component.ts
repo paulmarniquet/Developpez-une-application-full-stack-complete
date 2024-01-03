@@ -53,6 +53,16 @@ export class CreatePostComponent implements OnInit {
                 panelClass: ['greenToast']
             });
             this.comment = '';
-        });
+        },
+            (error: any) => {
+                console.error("Comment error:", error.error);
+                this.matSnackBar.open('Comment cannot be empty, please try again',
+                    'Close', {
+                        duration: 3000,
+                        panelClass: ['redToast']
+                    });
+                this.comment = '';
+            }
+            );
     }
 }

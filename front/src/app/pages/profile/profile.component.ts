@@ -3,7 +3,7 @@ import {ProfileService} from "../../services/profile.service";
 import {User} from "../../interfaces/user.interface";
 import {Topic} from "../../interfaces/topic.interface";
 import {Router} from "@angular/router";
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 @Component({
@@ -33,13 +33,22 @@ export class ProfileComponent implements OnInit {
             name: this.username,
             email: this.email,
         }, Number(localStorage.getItem('userID')!)).subscribe(() => {
-            this.router.navigate(['/me']);
-            this.matSnackBar.open('Profile updated', 'Close', {
-                duration: 2000,
-                panelClass: ['greenToast']
-            });
+                this.router.navigate(['/me']);
+                this.matSnackBar.open('Profile updated', 'Close', {
+                    duration: 2000,
+                    panelClass: ['greenToast']
+                });
 
-        });
+            },
+            (error: any) => {
+                console.error("Save error:", error.error);
+                this.matSnackBar.open('Some fields are invalid, please try again',
+                    'Close', {
+                        duration: 3000,
+                        panelClass: ['redToast']
+                    });
+            }
+        );
     }
 
     logOut() {

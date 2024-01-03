@@ -30,11 +30,23 @@ export class RegisterComponent implements OnInit {
                 (user: any) => {
                     localStorage.setItem('userID', JSON.stringify(user));
                     this.router.navigate(['/articles']);
+                },
+                (error: any) => {
+                    console.error("Error fetching user details:", error.error);
                 }
             );
             this.matSnackBar.open('You are registered', 'Close', {
                 duration: 2000,
             });
-        });
+        },
+            (error: any) => {
+                console.error("Some fields are invalid:", error.error);
+                this.matSnackBar.open('Some fields are invalid, please try again',
+                    'Close', {
+                        duration: 3000,
+                        panelClass: ['redToast']
+                    });
+            }
+            );
     }
 }

@@ -28,6 +28,7 @@ public class Post {
     @JoinColumn(name = "article_id", referencedColumnName = "id")
     private Article article;
 
+    @Size(max = 300)
     @Column(name="content")
     private String content;
 

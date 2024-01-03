@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Optional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,7 +79,7 @@ public class UserController {
     @PutMapping("/user/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable Long id, @Valid @RequestBody ProfileDto profile) {
         try {
-            Optional<User> user = userService.updateUser(profile, id);
+            User user = userService.updateUser(profile, id);
             return ResponseEntity.ok(user);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Informations invalides");
@@ -94,12 +93,14 @@ public class UserController {
      * @return
      */
     @GetMapping("/user/{id}")
-    public ResponseEntity<Optional<User>> getUser(@PathVariable Long id) {
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
         try {
-            Optional<User> user = userService.getUser(id);
+            User user = userService.getUser(id);
             return ResponseEntity.ok(user);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Optional.empty());
+            return ResponseEntity.badRequest().body(null);
         }
     }
 
@@ -125,12 +126,12 @@ public class UserController {
      * @return Iterable<Topic>
      */
     @PutMapping("/{id}/subscribe")
-    public ResponseEntity<Optional<User>> subscribe(@PathVariable Long id, @RequestBody Topic topic) {
+    public ResponseEntity<User> subscribe(@PathVariable Long id, @RequestBody Topic topic) {
         try {
-            Optional<User> user = userService.subscribe(id, topic);
+            User user = userService.subscribe(id, topic);
             return ResponseEntity.ok(user);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Optional.empty());
+            return ResponseEntity.badRequest().body(null);
         }
     }
 
@@ -141,12 +142,12 @@ public class UserController {
      * @return Iterable<Topic>
      */
     @PutMapping("/{id}/unsubscribe")
-    public ResponseEntity<Optional<User>> unsubscribe(@PathVariable Long id, @RequestBody Topic topic) {
+    public ResponseEntity<User> unsubscribe(@PathVariable Long id, @RequestBody Topic topic) {
         try {
-            Optional<User> user = userService.unsubscribe(id, topic);
+            User user = userService.unsubscribe(id, topic);
             return ResponseEntity.ok(user);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(Optional.empty());
+            return ResponseEntity.badRequest().body(null);
         }
     }
 }

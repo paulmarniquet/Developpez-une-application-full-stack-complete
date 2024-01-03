@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.CharBuffer;
-import java.util.Optional;
 
 @Data
 @Service
@@ -24,16 +23,18 @@ public class UserService {
 
     /**
      * Récupère un utilisateur à partir de son id
+     *
      * @param id
      * @return
      */
-    public Optional<User> getUser(Long id) {
-        return userRepository.findById(id);
+    public User getUser(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
     }
 
 
     /**
      * Récupère tous les utilisateurs
+     *
      * @return
      */
     public Iterable<User> getUsers() {
@@ -42,49 +43,54 @@ public class UserService {
 
     /**
      * Met à jour les informations d'un utilisateur
+     *
      * @param profile
      * @param id
      * @return
      */
-    public Optional<User> updateUser(ProfileDto profile, Long id) {
-        User user = userRepository.findById(id).get();
+    public User updateUser(ProfileDto profile, Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         user.setName(profile.getName());
         user.setEmail(profile.getEmail());
-        return Optional.of(userRepository.save(user));
+        return userRepository.save(user);
     }
 
 
     /**
      * Abonne un utilisateur à un topic
+     *
      * @param id
      * @param topic
      */
-    public Optional<User> subscribe(Long id, Topic topic) {
-        User user = userRepository.findById(id).get();
+    public User subscribe(Long id, Topic topic) {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         user.getTopics().add(topic);
-        return Optional.of(userRepository.save(user));
+        return userRepository.save(user);
     }
 
 
     /**
      * Désabonne un utilisateur à un topic
+     *
      * @param id
      * @param topic
      */
-    public Optional<User> unsubscribe(Long id, Topic topic) {
-        User user = userRepository.findById(id).get();
+    public User unsubscribe(Long id, Topic topic) {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         user.getTopics().remove(topic);
-        return Optional.of(userRepository.save(user));
+        return userRepository.save(user);
     }
 
 
     /**
      * Enregistre un utilisateur
+     *
      * @param request
      * @return
      */
     public JwtTokenDto register(RegisterDto request) {
-        if (userRepository.findByEmail(request.email).isPresent() || userRepository.findByName(request.name).isPresent()) {
+        if (userRepository.findByEmail(request.email) != null
+                || userRepository.findByName(request.name) != null) {
             throw new RuntimeException("User already exists");
         } else {
             User user = new User();
@@ -102,16 +108,13 @@ public class UserService {
 
     /**
      * Connecte un utilisateur
+     *
      * @param request
      * @return
      */
     public JwtTokenDto login(LoginDto request) {
-        User userByEmail = userRepository.findByEmail(request.getEmailOrUsername())
-                .orElse(null);
-
-        User userByUsername = userRepository.findByName(request.getEmailOrUsername())
-                .orElse(null);
-
+        User userByEmail = userRepository.findByEmail(request.getEmailOrUsername());
+        User userByUsername = userRepository.findByName(request.getEmailOrUsername());
         User user = (userByEmail != null) ? userByEmail : userByUsername;
 
         if (user != null && passwordEncoder.matches(CharBuffer.wrap(request.getPassword()), user.getPassword())) {
@@ -127,6 +130,7 @@ public class UserService {
 
     /**
      * Extrait le token de la requête
+     *
      * @param request
      * @return token
      */
@@ -140,13 +144,14 @@ public class UserService {
 
     /**
      * Récupère l'id de l'utilisateur connecté
+     *
      * @param request
      * @return
      */
     public Long me(HttpServletRequest request) {
         String token = extractTokenFromRequest(request);
         String email = new JwtTokenProvider().getUsernameFromToken(token);
-        Optional<User> user = userRepository.findByEmail(email);
-        return user.get().getId();
+        User user = userRepository.findByEmail(email);
+        return user.getId();
     }
 }

@@ -3,10 +3,7 @@ package com.openclassrooms.mddapi.service;
 import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Data
 @Service
@@ -19,8 +16,8 @@ public class TopicService {
      * @param id
      * @return
      */
-    public Optional<Topic> getTopic(Long id) {
-        return topicRepository.findById(id);
+    public Topic getTopic(Long id) {
+        return topicRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid topic Id:" + id));
     }
 
     /**

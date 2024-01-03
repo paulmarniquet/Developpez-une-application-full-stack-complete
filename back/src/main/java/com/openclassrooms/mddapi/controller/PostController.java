@@ -11,8 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @Validated
@@ -33,10 +33,12 @@ public class PostController {
      * @return
      */
     @GetMapping("/post/{articleId}")
-    public ResponseEntity<Optional<Post[]>> getPostsOfArticle(@PathVariable Long articleId) {
+    public ResponseEntity<Post[]> getPostsOfArticle(@PathVariable Long articleId) {
         try {
-            Optional<Post[]> posts = postService.getPostsOfArticle(articleId);
+            Post[] posts = postService.getPostsOfArticle(articleId);
             return ResponseEntity.ok(posts);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
@@ -52,9 +54,9 @@ public class PostController {
         try {
             Post newPost = new Post();
             newPost.setContent(post.getContent());
-            Article article = articleService.getArticle(post.getArticleId()).get();
+            Article article = articleService.getArticle(post.getArticleId());
             newPost.setArticle(article);
-            User user = userService.getUser(post.getUserId()).get();
+            User user = userService.getUser(post.getUserId());
             newPost.setUser(user);
             postService.savePost(newPost);
             return ResponseEntity.ok(newPost);

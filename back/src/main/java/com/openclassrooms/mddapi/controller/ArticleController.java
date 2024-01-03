@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @Validated
@@ -28,13 +27,15 @@ public class ArticleController {
      * Route qui va récupérer un article à partir de son id
      *
      * @param id
-     * @return Optional<Article>
+     * @return Article
      */
     @GetMapping("/article/{id}")
-    public ResponseEntity<Optional<Article>> getArticle(@PathVariable Long id) {
+    public ResponseEntity<Article> getArticle(@PathVariable Long id) {
         try {
-            Optional<Article> optionalArticle = articleService.getArticle(id);
-            return ResponseEntity.ok(optionalArticle);
+            Article article = articleService.getArticle(id);
+            return ResponseEntity.ok(article);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
@@ -83,8 +84,8 @@ public class ArticleController {
             Article newArticle = new Article();
             newArticle.setTitle(article.getTitle());
             newArticle.setContent(article.getContent());
-            newArticle.setTopic(topicService.getTopic(article.getTopicId()).get());
-            newArticle.setUser(userService.getUser(article.getUserId()).get());
+            newArticle.setTopic(topicService.getTopic(article.getTopicId()));
+            newArticle.setUser(userService.getUser(article.getUserId()));
             articleService.saveArticle(newArticle);
             return ResponseEntity.ok().build();
         } catch (Exception e) {

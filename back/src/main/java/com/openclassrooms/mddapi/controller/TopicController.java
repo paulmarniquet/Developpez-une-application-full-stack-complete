@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -27,8 +25,14 @@ public class TopicController {
      */
     @GetMapping("/topic/{id}")
     public ResponseEntity<Topic> getTopic(@PathVariable Long id) {
-        Optional<Topic> optionalTopic = topicService.getTopic(id);
-        return optionalTopic.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        try {
+            Topic topic = topicService.getTopic(id);
+            return ResponseEntity.ok(topic);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     /**

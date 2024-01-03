@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {HeaderComponent} from '../../../components/header/header.component';
 import {AuthService} from "../../../services/auth.service";
 import {LoginDto} from "../../../dto/login-dto.interface";
 import {Router} from "@angular/router";
@@ -13,14 +12,15 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class LoginComponent implements OnInit {
     user!: string;
     password!: string;
+    buttonClicked: boolean = false;
 
     constructor(private authService: AuthService, private router: Router, private matSnackBar: MatSnackBar) {
     }
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     login() {
+        this.buttonClicked = true;
         const request: LoginDto = {
             emailOrUsername: this.user,
             password: this.password

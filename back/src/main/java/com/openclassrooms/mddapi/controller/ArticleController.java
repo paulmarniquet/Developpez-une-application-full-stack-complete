@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -79,7 +78,7 @@ public class ArticleController {
      * @return Nouvel Article
      */
     @PostMapping("/articles")
-    public ResponseEntity<Article> saveArticle(@RequestBody @Valid ArticleDto article) {
+    public ResponseEntity<String> saveArticle(@RequestBody @Valid ArticleDto article) {
         try {
             Article newArticle = new Article();
             newArticle.setTitle(article.getTitle());
@@ -87,9 +86,9 @@ public class ArticleController {
             newArticle.setTopic(topicService.getTopic(article.getTopicId()).get());
             newArticle.setUser(userService.getUser(article.getUserId()).get());
             articleService.saveArticle(newArticle);
-            return ResponseEntity.ok(newArticle);
+            return ResponseEntity.ok().build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

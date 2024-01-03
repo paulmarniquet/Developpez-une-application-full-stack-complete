@@ -19,7 +19,7 @@ export class CreateArticleComponent implements OnInit {
     private articleService: ArticlesService = new ArticlesService(this.httpClient);
     private topicService: TopicService = new TopicService(this.httpClient);
 
-    constructor(private httpClient: HttpClient, private router : Router, private matSnackBar: MatSnackBar) {
+    constructor(private httpClient: HttpClient, private router: Router, private matSnackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {
@@ -35,11 +35,20 @@ export class CreateArticleComponent implements OnInit {
             topicId: this.themeArticle!,
             userId: Number(localStorage.getItem('userID')!),
         }).subscribe(() => {
-            this.router.navigate(['/articles']);
-            this.matSnackBar.open('Article created', 'Close', {
-                duration: 2000,
-                panelClass: ['greenToast']
-            });
-        });
+                this.router.navigate(['/articles']);
+                this.matSnackBar.open('Article created', 'Close', {
+                    duration: 2000,
+                    panelClass: ['greenToast']
+                });
+            },
+            (error: any) => {
+                console.error("Article error:", error.error);
+                this.matSnackBar.open('Some fields are invalid, please try again',
+                    'Close', {
+                        duration: 3000,
+                        panelClass: ['redToast']
+                    });
+            }
+        );
     }
 }

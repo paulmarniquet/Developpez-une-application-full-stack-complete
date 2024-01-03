@@ -2,7 +2,6 @@ package com.openclassrooms.mddapi.entity;
 
 import lombok.*;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
@@ -17,15 +16,12 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NonNull
     @Column(name="email")
     private String email;
 
-    @NonNull
     @Column(name="name")
     private String name;
 
-    @NonNull
     @Column (name="password")
     private String password;
 

@@ -27,7 +27,6 @@ public class Post {
     @JoinColumn(name = "article_id", referencedColumnName = "id")
     private Article article;
 
-    @NonNull
     @Column(name="content")
     private String content;
 

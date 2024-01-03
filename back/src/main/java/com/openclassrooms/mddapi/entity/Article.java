@@ -26,10 +26,8 @@ public class Article {
     @JoinColumn(name = "topic_id", referencedColumnName = "id")
     private Topic topic;
 
-    @NotNull
     private String title;
 
-    @NotNull
     private String content;
 
     @UpdateTimestamp

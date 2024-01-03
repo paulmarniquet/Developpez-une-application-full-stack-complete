@@ -5,15 +5,16 @@ import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.Optional;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
-
 @RestController
+@Validated
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class UserController {
@@ -26,14 +27,15 @@ public class UserController {
      * @return
      */
     @PostMapping("/auth/register")
-    public ResponseEntity<Object> saveUser(@RequestBody RegisterDto user) {
+    public ResponseEntity<Object> saveUser(@Valid @RequestBody RegisterDto user) {
         try {
             JwtTokenDto newUser = userService.register(user);
             return ResponseEntity.ok(newUser);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
 
     /**
      * Route qui va connecter un utilisateur
@@ -41,12 +43,17 @@ public class UserController {
      * @return
      */
     @PostMapping("/auth/login")
-    public ResponseEntity<Object> login(@RequestBody LoginDto user) {
+    public ResponseEntity<Object> login(@Valid @RequestBody LoginDto user) {
+        if (user.getEmailOrUsername() == null || user.getEmailOrUsername().isEmpty() ||
+                user.getPassword() == null || user.getPassword().isEmpty()) {
+            return ResponseEntity.badRequest().body("Veuillez fournir un email/nom d'utilisateur et un mot de passe valides.");
+        }
+
         try {
             JwtTokenDto newUser = userService.login(user);
             return ResponseEntity.ok(newUser);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 

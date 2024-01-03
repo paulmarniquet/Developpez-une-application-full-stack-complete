@@ -27,11 +27,13 @@
         <div class="flex justify-center items-center flex-col relative">
 
             <ng-container *ngFor="let comment of posts">
-                <div class="flex m-4 relative right-10">
+                <div id="posts" class="flex m-4 relative right-10 lg:w-96">
                     <div class="mx-10 mobile:ml-6">
                         <h4>{{ comment.user.name }}</h4>
                     </div>
-                    <div class="p-4 rounded-2xl h-auto bg-gray-300 w-96 mobile:w-60 break-words">{{ comment?.content }}</div>
+                    <div class="p-4 rounded-2xl h-auto bg-gray-300 break-words"
+                         style="width: 100%">{{ comment?.content }}
+                    </div>
                 </div>
             </ng-container>
 

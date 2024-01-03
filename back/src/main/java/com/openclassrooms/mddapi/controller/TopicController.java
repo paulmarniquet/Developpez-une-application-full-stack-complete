@@ -16,7 +16,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TopicController {
 
-    @Autowired
     private final TopicService topicService;
 
     /**

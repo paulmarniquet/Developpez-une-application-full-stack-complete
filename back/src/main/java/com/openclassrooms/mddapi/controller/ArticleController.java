@@ -16,13 +16,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ArticleController {
 
-    @Autowired
     private final ArticleService articleService;
 
-    @Autowired
     private final TopicService topicService;
 
-    @Autowired
     private final UserService userService;
 
     /**

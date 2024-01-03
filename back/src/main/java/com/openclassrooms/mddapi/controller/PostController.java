@@ -18,13 +18,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PostController {
 
-    @Autowired
     private final PostService postService;
 
-    @Autowired
     private final UserService userService;
 
-    @Autowired
     private final ArticleService articleService;
 
     /**

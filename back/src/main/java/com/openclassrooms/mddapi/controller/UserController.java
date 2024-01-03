@@ -18,7 +18,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
     private final UserService userService;
 
     /**

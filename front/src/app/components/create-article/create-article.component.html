@@ -6,7 +6,7 @@
     </svg>
 </div>
 <div class="newArticleForm">
-    <ng-form>
+    <ng-form #articleForm="ngForm">
         <div class="h-max flex flex-col justify-center items-center">
             <h1 class="text-6xl">Créer un nouvel article</h1>
             <div class="flex flex-col justify-center items-center">
@@ -15,7 +15,7 @@
                     <mat-select name="theme" id="theme"
                                 class="text-lg border-2 border-bluefont rounded-md h-10 pl-2 pt-1 mobile:w-96"
                                 placeholder="Selectionner un thème"
-                                [(ngModel)]="themeArticle">
+                                [(ngModel)]="themeArticle" [required]="true">
                         <mat-option *ngFor="let topic of topics" [value]="topic.id">{{ topic.title }}</mat-option>
                     </mat-select>
                 </div>
@@ -23,16 +23,19 @@
                 <div class="flex flex-col justify-center mt-8">
                     <input placeholder="Titre de l'article" type="text" name="titre" id="titre"
                            class="text-lg h-10 w-72 border-2 border-bluefont rounded-md pl-2 mobile:w-96"
-                           [(ngModel)]="titreArticle">
+                           [(ngModel)]="titreArticle" [required]="true" [minlength]="5" [maxlength]="40">
                 </div>
 
                 <div class="flex flex-col justify-center mt-8">
                     <textarea placeholder="Contenu de l'article" type="text" name="contenu" id="contenu"
                               class="h-40 w-72 border-2 border-bluefont rounded-md pl-2 mobile:w-96"
-                              [(ngModel)]="contenuArticle"></textarea>
+                              [(ngModel)]="contenuArticle" [required]="true" [minlength]="20"
+                              [maxlength]="3000"></textarea>
                 </div>
 
-                <button mat-raised-button color="primary" class="top-6" (click)="submitNewArticle()">Créer</button>
+                <button mat-raised-button color="primary" class="top-6" (click)="submitNewArticle()"
+                        [disabled]="articleForm.invalid!">Créer
+                </button>
             </div>
         </div>
     </ng-form>

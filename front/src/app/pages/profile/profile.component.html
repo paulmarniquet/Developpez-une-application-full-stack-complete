@@ -1,21 +1,23 @@
 <app-header></app-header>
 
 <div class="profileForm mt-10">
-    <ng-form>
+    <ng-form #profileForm="ngForm">
         <div class="h-max flex flex-col justify-center items-center">
             <p class="text-2xl font-semibold">Profil utilisateur</p>
             <div class="flex flex-col justify-center items-center">
                 <div class="flex flex-col justify-center mt-6">
                     <input type="text" name="username" id="username"
                            class="h-10 w-72 border-2 border-bluefont rounded-md pl-2"
-                           [(ngModel)]="username">
+                           [(ngModel)]="username" [required]="true" [minlength]="3">
                 </div>
                 <div class="flex flex-col justify-center mt-8">
                     <input type="email" name="email" id="email"
                            class="h-10 w-72 border-2 border-bluefont rounded-md pl-2"
-                           [(ngModel)]="email">
+                           [(ngModel)]="email" [required]="true" [email]="true">
                 </div>
-                <button mat-raised-button color="primary" class="top-8" (click)="save()">Sauvegarder</button>
+                <button mat-raised-button color="primary" class="top-8" (click)="save()"
+                        [disabled]="profileForm.invalid!">Sauvegarder
+                </button>
                 <a (click)="logOut()" class="text-[#a40f0f] mt-12 font-semibold cursor-pointer">Se déconnecter</a>
             </div>
         </div>

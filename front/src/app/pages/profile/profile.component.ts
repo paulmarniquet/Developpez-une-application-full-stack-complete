@@ -40,8 +40,8 @@ export class ProfileComponent implements OnInit {
                 });
             },
             (error: any) => {
-                console.error("Save error:", error.error);
-                this.matSnackBar.open('Some fields are invalid, please try again',
+                console.error("Update error:", error.error);
+                this.matSnackBar.open('An other user has already this email/username',
                     'Close', {
                         duration: 3000,
                         panelClass: ['redToast']

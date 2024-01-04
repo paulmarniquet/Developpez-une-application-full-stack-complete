@@ -14,7 +14,6 @@ export class RegisterComponent implements OnInit {
     password!: string;
     username!: string;
     buttonClicked: boolean = false;
-    infoEmail: boolean = false;
     infoPassword: boolean = false;
 
     constructor(private authService: AuthService, private router: Router, private matSnackBar: MatSnackBar) {
@@ -25,8 +24,9 @@ export class RegisterComponent implements OnInit {
 
     register() {
         this.buttonClicked = true;
-        !this.validateEmail(this.email) ? this.infoEmail = true : this.infoEmail = false;
-        !this.validatePassword(this.password) ? this.infoPassword = true : this.infoPassword = false;
+        if (!this.validatePassword(this.password) ? this.infoPassword = true : this.infoPassword = false) {
+            return;
+        }
 
         const request: RegisterDto = {
             email: this.email,
@@ -49,19 +49,13 @@ export class RegisterComponent implements OnInit {
                 });
             },
             (error: any) => {
-                console.error("Some fields are invalid:", error.error);
-                this.matSnackBar.open('Some fields are invalid, please try again',
+                this.matSnackBar.open('User with this email/username already exists',
                     'Close', {
                         duration: 3000,
                         panelClass: ['redToast']
                     });
             }
         );
-    }
-
-    private validateEmail(email: string): boolean {
-        const patternEmail = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-        return patternEmail.test(email);
     }
 
     private validatePassword(password: string): boolean {

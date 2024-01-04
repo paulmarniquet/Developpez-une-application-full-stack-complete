@@ -12,7 +12,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class LoginComponent implements OnInit {
     user!: string;
     password!: string;
-    buttonClicked: boolean = false;
 
     constructor(private authService: AuthService, private router: Router, private matSnackBar: MatSnackBar) {
     }
@@ -20,7 +19,6 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {}
 
     login() {
-        this.buttonClicked = true;
         const request: LoginDto = {
             emailOrUsername: this.user,
             password: this.password

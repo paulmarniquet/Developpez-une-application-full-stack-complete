@@ -48,7 +48,16 @@ public class UserService {
      * @return
      */
     public User updateUser(ProfileDto profile, Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        User existingUserByEmail = userRepository.findByEmail(profile.getEmail());
+        User existingUserByName = userRepository.findByName(profile.getName());
+
+        if ((existingUserByEmail != null && !existingUserByEmail.getId().equals(id))
+                || (existingUserByName != null && !existingUserByName.getId().equals(id))) {
+            throw new RuntimeException("This user already exists");
+        }
+
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
         user.setName(profile.getName());
         user.setEmail(profile.getEmail());
         return userRepository.save(user);

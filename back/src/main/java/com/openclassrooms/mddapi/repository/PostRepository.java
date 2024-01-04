@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface PostRepository extends CrudRepository<Post, Long> {
-    Post[] findByArticleId(Long article_id);
+    Iterable<Post> findByArticleId(Long article_id);
 }

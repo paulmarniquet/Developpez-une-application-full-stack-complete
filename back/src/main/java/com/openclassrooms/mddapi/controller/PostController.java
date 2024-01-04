@@ -32,9 +32,9 @@ public class PostController {
      * @return
      */
     @GetMapping("/post/{articleId}")
-    public ResponseEntity<Post[]> getPostsOfArticle(@PathVariable Long articleId) {
+    public ResponseEntity<Iterable<Post>> getPostsOfArticle(@PathVariable Long articleId) {
         try {
-            Post[] posts = postService.getPostsOfArticle(articleId);
+            Iterable<Post> posts = postService.getPostsOfArticle(articleId);
             return ResponseEntity.ok(posts);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();

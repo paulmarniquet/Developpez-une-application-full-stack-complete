@@ -17,7 +17,7 @@ public class PostService {
      * @param articleId
      * @return
      */
-    public Post[] getPostsOfArticle(Long articleId) {
+    public Iterable<Post> getPostsOfArticle(Long articleId) {
         return postRepository.findByArticleId(articleId);
     }
 

@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import { environment } from '../../environments/environment';
 import {ProfileDto} from "../dto/profile-dto.interface";
 import {Topic} from "../interfaces/topic.interface";
-import {User} from "../interfaces/user.interface";
 
 @Injectable({
   providedIn: 'root'

@@ -14,10 +14,6 @@ export class ArticlesService {
 
     constructor(private httpClient: HttpClient) {}
 
-    public getArticles(): Observable<Article[]> {
-        return this.httpClient.get<Article[]>(`${environment.api}${this.pathService}`);
-    }
-
     public getArticle(id: number): Observable<Article> {
         return this.httpClient.get<Article>(`${environment.api}article/${id}`);
     }

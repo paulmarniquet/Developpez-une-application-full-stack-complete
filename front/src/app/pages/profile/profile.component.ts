@@ -38,7 +38,6 @@ export class ProfileComponent implements OnInit {
                     duration: 2000,
                     panelClass: ['greenToast']
                 });
-
             },
             (error: any) => {
                 console.error("Save error:", error.error);
@@ -52,8 +51,7 @@ export class ProfileComponent implements OnInit {
     }
 
     logOut() {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userID');
+        localStorage.clear();
         this.router.navigate(['/login']);
         this.matSnackBar.open('You are logged out', 'Close', {
             duration: 2000,

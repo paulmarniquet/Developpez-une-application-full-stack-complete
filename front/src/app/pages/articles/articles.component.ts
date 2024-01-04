@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ArticlesService} from '../../services/articles.service';
-import {Observable} from 'rxjs';
 import {Article} from "../../interfaces/article.interface";
-import {AuthService} from "../../services/auth.service";
 
 @Component({
     selector: 'app-articles',
@@ -10,7 +8,8 @@ import {AuthService} from "../../services/auth.service";
     styleUrls: ['./articles.component.scss']
 })
 export class ArticlesComponent implements OnInit {
-    constructor(private articleService: ArticlesService, private authService: AuthService) {}
+    constructor(private articleService: ArticlesService) {
+    }
 
     public articles: Article[] = [];
     public boolOrderDate: boolean = false;

@@ -36,10 +36,7 @@ public class SecurityConfig {
                     CorsConfiguration config = new CorsConfiguration();
                     config.addAllowedHeader("*");
                     config.addAllowedMethod("*");
-                    config.addAllowedOrigin("*");
-/*
-                    config.setAllowedOrigins(Collections.singletonList(("http://localhost:4200")));
-*/
+                    config.addAllowedOrigin("http://localhost:4200");
                     return config;
                 }))
                 .csrf().disable()

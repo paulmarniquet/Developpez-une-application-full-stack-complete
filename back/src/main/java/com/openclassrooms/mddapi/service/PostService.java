@@ -18,7 +18,7 @@ public class PostService {
      * @return
      */
     public Post[] getPostsOfArticle(Long articleId) {
-        return postRepository.findByArticleId(articleId).orElseThrow(() -> new IllegalArgumentException("Invalid article Id:" + articleId));
+        return postRepository.findByArticleId(articleId);
     }
 
     /**

@@ -2,7 +2,6 @@ package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.entity.Article;
 import com.openclassrooms.mddapi.entity.Topic;
-import com.openclassrooms.mddapi.entity.User;
 import com.openclassrooms.mddapi.repository.ArticleRepository;
 import lombok.Data;
 import org.springframework.stereotype.Service;
@@ -41,10 +40,9 @@ public class ArticleService {
     /**
      * Sauvegarde un article
      * @param article
-     * @return
      */
-    public Article saveArticle(Article article) {
-        return articleRepository.save(article);
+    public void saveArticle(Article article) {
+        articleRepository.save(article);
     }
 
     /**
@@ -52,20 +50,11 @@ public class ArticleService {
      * @param userId
      */
     public Iterable<Article> getFeed(Long userId) {
-        User user = userService.getUser(userId);
         List<Number> topicIds = new ArrayList<>();
-        for (Topic topic : user.getTopics()) {
+        for (Topic topic : userService.getUser(userId).getTopics()) {
             topicIds.add(topic.getId());
         }
-
-        List<Article> userArticles = new ArrayList<>();
-        Iterable<Article> articles = articleRepository.findAll();
-        for (Article article : articles) {
-            if (topicIds.contains(article.getTopic().getId())) {
-                userArticles.add(article);
-            }
-        }
-        return userArticles;
+        return articleRepository.findByTopicIdIn(topicIds);
     }
 
 }
